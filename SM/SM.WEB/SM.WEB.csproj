@@ -183,6 +183,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612081922559_InitialModel.cs" />
+    <Compile Include="Migrations\201612081922559_InitialModel.Designer.cs">
+      <DependentUpon>201612081922559_InitialModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612082021329_SchoolPropertyAdded.cs" />
+    <Compile Include="Migrations\201612082021329_SchoolPropertyAdded.Designer.cs">
+      <DependentUpon>201612082021329_SchoolPropertyAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -260,6 +269,14 @@
       <Project>{48ae2a99-c3bf-4313-8e4f-b3958e278d96}</Project>
       <Name>SM.LIB</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201612081922559_InitialModel.resx">
+      <DependentUpon>201612081922559_InitialModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612082021329_SchoolPropertyAdded.resx">
+      <DependentUpon>201612082021329_SchoolPropertyAdded.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

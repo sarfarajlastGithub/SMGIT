@@ -1,4 +1,4 @@
-namespace SM.LIB.Migrations
+namespace SM.WEB.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
@@ -35,6 +35,7 @@ namespace SM.LIB.Migrations
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128),
+                        Name = c.String(),
                         Email = c.String(maxLength: 256),
                         EmailConfirmed = c.Boolean(nullable: false),
                         PasswordHash = c.String(),

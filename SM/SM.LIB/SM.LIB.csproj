@@ -97,15 +97,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
-    <Compile Include="EN\ApplicationDbContext.cs" />
-    <Compile Include="EN\School\ApplicationUser.cs" />
-    <Compile Include="Migrations\201612081845232_InitialModel.cs" />
-    <Compile Include="Migrations\201612081845232_InitialModel.Designer.cs">
-      <DependentUpon>201612081845232_InitialModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="VM\Account\Enums\City.cs" />
+    <Compile Include="EN\School\SAddress.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VM\Account\Enums\SchoolFType.cs" />
+    <Compile Include="VM\Account\Enums\SchoolGType.cs" />
+    <Compile Include="VM\Account\Enums\SClass.cs" />
+    <Compile Include="VM\Account\Enums\State.cs" />
     <Compile Include="VM\Account\ExternalLoginConfirmationViewModel.cs" />
     <Compile Include="VM\Account\ExternalLoginListViewModel.cs" />
     <Compile Include="VM\Account\ForgotPasswordViewModel.cs" />
@@ -128,9 +126,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201612081845232_InitialModel.resx">
-      <DependentUpon>201612081845232_InitialModel.cs</DependentUpon>
-    </EmbeddedResource>
+    <Folder Include="EN\School\Enum\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
