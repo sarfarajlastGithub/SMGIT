@@ -1,0 +1,309 @@
+﻿@model SM.LIB.VM.Account.SchoolProfileModel
+@{
+    bool val = Convert.ToBoolean(ViewBag.Complete);
+    if (val)
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_LayoutEmptyInfo.cshtml";
+    }
+
+}
+
+
+<div class="be-content">
+    <div class="page-head">
+        <h2 class="page-head-title">Profile Update</h2>
+        <ol class="breadcrumb page-head-nav">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Forms</a></li>
+            <li class="active">Wizard</li>
+        </ol>
+    </div>
+    <div class="main-content container-fluid">
+        <div class="row wizard-row">
+            <div class="col-md-12 fuelux">
+                <div class="block-wizard panel panel-default">
+                    <div id="wizard1" class="wizard wizard-ux">
+                        <ul class="steps">
+                            <li data-step="1" class="active">Basic<span class="chevron"></span></li>
+                            <li data-step="2">Contact<span class="chevron"></span></li>
+                            <li data-step="3">Address<span class="chevron"></span></li>
+                            <li data-step="4">Academic<span class="chevron"></span></li>
+                            <li data-step="5">Class<span class="chevron"></span></li>
+                        </ul>
+                        @*<div class="actions">
+                                <button type="button" class="btn btn-xs btn-prev btn-default"><i class="icon mdi mdi-chevron-left"></i>Prev</button>
+                                <button type="button" data-last="Finish" class="btn btn-xs btn-next btn-default">Next<i class="icon mdi mdi-chevron-right"></i></button>
+                            </div>*@
+                        @using (Html.BeginForm("Update", "Account", FormMethod.Post, new { role = "form" }))
+                        {
+                        <div class="step-content">
+                            <div data-step="1" class="step-pane active">
+                                <div class="form-group no-padding">
+                                    <div class="col-sm-7">
+                                        <h3 class="wizard-title">Basic Info</h3>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.SchoolName, new { @class = "col-sm-3 control-label" })
+                                    <div class="col-sm-6">
+                                        @Html.TextBoxFor(m => m.SchoolName, new { @class = "form-control", placeholder = "School Name" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.SchoolFType, new { @class = "col-sm-3 control-label" })
+                                    <div class="col-sm-6">
+                                        @Html.TextBoxFor(m => m.SchoolName, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.SchoolGType, new { @class = "col-sm-3 control-label" })
+                                    <div class="col-sm-6">
+                                        @Html.TextBoxFor(m => m.SchoolGType, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.TotalStudents, new { @class = "col-sm-3 control-label" })
+                                    <div class="col-sm-6">
+                                        @Html.TextBoxFor(m => m.SchoolName, new { @class = "form-control", placeholder = "In Number" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <button class="btn btn-default btn-space">Cancel</button>
+                                        <button data-wizard="#wizard1" class="btn btn-primary btn-space wizard-next">Next Step</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-step="2" class="step-pane active">
+                                <div class="form-group no-padding">
+                                    <div class="col-sm-7">
+                                        <h3 class="wizard-title">Contact Info</h3>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.TotalStudents, new { @class = "col-sm-3 control-label" })
+                                    <div class="col-sm-6">
+                                        @Html.TextBoxFor(m => m.SchoolName, new { @class = "form-control", placeholder = "In Number" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.EmailId, new { @class = "col-sm-3 control-label" })
+                                    <div class="col-sm-6">
+                                        @Html.TextBoxFor(m => m.EmailId, new { @class = "form-control", placeholder = "somting@som.com" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.CPName, new { @class = "col-sm-3 control-label" })
+                                    <div class="col-sm-6">
+                                        @Html.TextBoxFor(m => m.CPName, new { @class = "form-control", placeholder = "Name" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.CPPhone, new { @class = "col-sm-3 control-label" })
+                                    <div class="col-sm-6">
+                                        @Html.TextBoxFor(m => m.CPPhone, new { @class = "form-control", placeholder = "Mobile Number" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <button class="btn btn-default btn-space">Cancel</button>
+                                        <button data-wizard="#wizard1" class="btn btn-primary btn-space wizard-next">Next Step</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-step="3" class="step-pane active">
+                                <div class="form-group no-padding">
+                                    <div class="col-sm-7">
+                                        <h3 class="wizard-title">Address</h3>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.SAddress.AddL1, new { @class = "col-sm-3 control-label" })
+                                    <div class="col-sm-6">
+                                        @Html.TextBoxFor(m => m.SAddress.AddL1, new { @class = "form-control", placeholder = "Address In details" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.SAddress.AddL2, new { @class = "col-sm-3 control-label" })
+                                    <div class="col-sm-6">
+                                        @Html.TextBoxFor(m => m.SAddress.AddL2, new { @class = "form-control", placeholder = "Address In details" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.SAddress.Pin, new { @class = "col-sm-3 control-label" })
+                                    <div class="col-sm-6">
+                                        @Html.TextBoxFor(m => m.SAddress.Pin, new { @class = "form-control", placeholder = "6 Digit Number" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.SAddress.City, new { @class = "col-sm-3 control-label" })
+                                    <div class="col-sm-6">
+                                        @Html.TextBoxFor(m => m.SAddress.City, new { @class = "form-control", placeholder = "City Name" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.SAddress.state, new { @class = "col-sm-3 control-label" })
+                                    <div class="col-sm-6">
+                                        @Html.TextBoxFor(m => m.SAddress.state, new { @class = "form-control", placeholder = "State Name" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <button class="btn btn-default btn-space">Cancel</button>
+                                        <button data-wizard="#wizard1" class="btn btn-primary btn-space wizard-next">Next Step</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-step="4" class="step-pane active">
+                                <div class="form-group no-padding">
+                                    <div class="col-sm-7">
+                                        <h3 class="wizard-title">Academic Info</h3>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Board, new { @class = "col-sm-3 control-label" })
+                                    <div class="col-sm-6">
+                                        @Html.TextBoxFor(m => m.Board, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.AnnulDateOfExam, new { @class = "col-sm-3 control-label" })
+                                    <div class="col-sm-6">
+                                        @Html.TextBoxFor(m => m.AnnulDateOfExam, new { @class = "form-control", placeholder = "Date" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Medium, new { @class = "col-sm-3 control-label" })
+                                    <div class="col-sm-6">
+                                        @Html.TextBoxFor(m => m.Medium, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.EstablishedDate, new { @class = "col-sm-3 control-label" })
+                                    <div class="col-sm-6">
+                                        @Html.TextBoxFor(m => m.EstablishedDate, new { @class = "form-control", placeholder = "Date" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <button class="btn btn-default btn-space">Cancel</button>
+                                        <button data-wizard="#wizard1" class="btn btn-primary btn-space wizard-next">Next Step</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-step="5" class="step-pane">
+                                <div class="form-group no-padding">
+                                    <div class="col-sm-7">
+                                        <h3 class="wizard-title">Select Class and Section</h3>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-12 control-label">Check Class</label>
+
+                                    <!--One Class With Section Begin-->
+                                    <div class="col-sm-12">
+                                        <div class="be-checkbox col-sm-4">
+                                            <input type="checkbox" id="@Model.ClassAndSection.Name">
+                                            <label for="@Model.ClassAndSection.Name">Class I</label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <label class="control-label">Keywords</label>
+                                            <p>Write your Section according to class</p>
+                                            <select multiple="" class="tags">
+                                                <option value="1">A</option>
+                                                <option value="2">B</option>
+                                                <option value="3">C</option>
+                                                <option value="4">D</option>
+                                                <option value="5">E</option>
+                                                <option value="6">F</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <!--One Class With Section End-->
+
+                                    @*@foreach (var sClass in Model.ClassAndSections)
+                                    {
+                                        <div class="be-checkbox col-sm-4">
+                                            <input type="checkbox" id="@sClass.Name">
+                                            <label for="@sClass.Name">Remember Me</label>
+                                        </div>
+                                        <div class="form-group col-sm-8">
+                                            <div class="col-sm-4">
+                                                <section>List of Section: </section>
+                                                @foreach (var sSection in sClass.ListOfSection)
+                                                {
+                                                    <section>@sSection.Name &nbsp;&nbsp;</section>
+                                                }
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <label class="control-label">Keywords</label>
+                                                <p>Write your keywords to do a successful SEO with web search engines.</p>
+                                                <select multiple="" class="tags">
+                                                    <option value="1">A</option>
+                                                    <option value="2">B</option>
+                                                    <option value="3">C</option>
+                                                    <option value="4">D</option>
+                                                    <option value="5">E</option>
+                                                    <option value="6">F</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    }*@
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-6">
+                                        <label class="control-label">Buy Credits: <span id="credits">$30</span></label>
+                                        <p>This option allow you to buy an amount of credits.</p>
+                                        <input id="credit_slider" type="text" value="30" class="bslider form-control">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label class="control-label">Change Plan</label>
+                                        <p>Change your plan many times as you want.</p>
+                                        <select class="select2">
+                                            <optgroup label="Personal">
+                                                <option value="p1">Basic</option>
+                                                <option value="p2">Medium</option>
+                                            </optgroup>
+                                            <optgroup label="Company">
+                                                <option value="p3">Standard</option>
+                                                <option value="p4">Silver</option>
+                                                <option value="p5">Gold</option>
+                                            </optgroup>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-6">
+                                        <label class="control-label">Payment Rate: <span id="rate">5%</span></label>
+                                        <p>Choose your payment rate to calculate how much money you will recieve.</p>
+                                        <input id="rate_slider" data-slider-min="0" data-slider-max="100" type="text" value="5" class="bslider form-control">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label class="control-label">Keywords</label>
+                                        <p>Write your keywords to do a successful SEO with web search engines.</p>
+                                        <select multiple="" class="tags">
+                                            <option value="1">Twitter</option>
+                                            <option value="2">Google</option>
+                                            <option value="3">Facebook</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <button data-wizard="#wizard1" class="btn btn-default btn-space wizard-previous">Previous</button>
+                                        <button data-wizard="#wizard1" class="btn btn-success btn-space wizard-next">Complete</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

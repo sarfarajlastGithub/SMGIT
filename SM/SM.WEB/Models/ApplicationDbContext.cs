@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using SM.LIB.EN.School;
 
 namespace SM.WEB.Models
 {
@@ -24,10 +25,12 @@ namespace SM.WEB.Models
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
-
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
         }
+
+        public DbSet<ClassAndSection> ClassAndSection { get; set; }
+        public DbSet<SAddress> SAddresses { get; set; }
     }
 }

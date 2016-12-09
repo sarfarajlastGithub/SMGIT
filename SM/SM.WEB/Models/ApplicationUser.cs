@@ -16,11 +16,20 @@ namespace SM.WEB.Models
         public string Name { get; set; }
         public string CPName { get; set; }
         public string CPPhone { get; set; }
-        public SchoolFType schoolFType { get; set; }
-        public SchoolGType schoolGType { get; set; }
-        public SClass sClass { get; set; }
-        public SAddress sAddress { get; set; }
-        public int sAddressId { get; set; }
+        public SBoard Board { get; set; }
+        public int TotalStudent { get; set; }
+        public SchoolFType SchoolFType { get; set; }
+        public SchoolGType SchoolGType { get; set; }
+        public SClass SClass { get; set; }
+        public SAddress SAddress { get; set; }
+        public int SAddressId { get; set; }
+        public DateTime DateTime { get; set; }
+        public bool IsComplete { get; set; }
+        public DateTime LastUpdatedDate { get; set; }
+        public int SchoolPhoneNumber { get; set; }
+        public DateTime AnnulDateOfExam { get; set; }
+        public Medium Medium { get; set; }
+        public DateTime EstablishedDate { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType

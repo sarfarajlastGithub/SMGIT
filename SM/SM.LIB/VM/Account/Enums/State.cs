@@ -8,7 +8,9 @@ namespace SM.LIB.VM.Account.Enums
 {
     public enum State
     {
-        WestBengal = 1
-
+        ChangeIt = 0,
+        WestBengal = 1,
+        UttarPradesh = 2,
+        Bihar = 3
     }
 }

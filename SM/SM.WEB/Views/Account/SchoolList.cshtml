@@ -1,0 +1,67 @@
+﻿@model IEnumerable<SM.WEB.Models.ApplicationUser>
+
+@{
+
+    ViewBag.Title = "SchoolList";
+}
+
+
+<div class="col-sm-12">
+    <div class="panel panel-default panel-table">
+        <div class="panel-heading">
+            Registered School List
+            <div class="tools"><span class="icon mdi mdi-download"></span><span class="icon mdi mdi-more-vert"></span></div>
+        </div>
+        <div class="panel-body">
+            <table class="table table-striped table-borderless table-hover">
+                <thead>
+                    <tr>
+                        <th style="width:32%;">School Name</th>
+                        <th style="width:30%;">Board</th>
+                        <th style="width:10%;">Student No.</th>
+                        <th style="width:45%;">Contact Name</th>
+                        <th style="width:45%;">Mobile</th>
+                        <th style="width:45%;">Email</th>
+                        <th style="width:45%;">RegistraTion Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        bool val = true;
+                    }
+                    @foreach (var school in Model)
+                    {
+                        if (val)
+                        {
+                            val = !val;
+
+                            <tr>
+                                <td>@school.Name</td>
+                                <td>@school.Board</td>
+                                <td>@school.TotalStudent</td>
+                                <td>@school.CPName</td>
+                                <td>@school.CPPhone</td>
+                                <td>@school.Email</td>
+                                <td>@school.dateTime.ToString("MMM dd, yyyy")</td>
+                            </tr>
+                        }
+                        else
+                        {
+                            val = !val;
+                            <tr class="success">
+                                <td>@school.Name</td>
+                                <td>@school.Board</td>
+                                <td>@school.TotalStudent</td>
+                                <td>@school.CPName</td>
+                                <td>@school.CPPhone</td>
+                                <td>@school.Email</td>
+                                <td>@school.dateTime.ToString("MMM dd, yyyy")</td>
+                            </tr>
+                        }
+
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

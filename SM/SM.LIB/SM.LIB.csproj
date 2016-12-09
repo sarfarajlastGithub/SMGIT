@@ -97,12 +97,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EN\School\ClassAndSection.cs" />
     <Compile Include="VM\Account\Enums\City.cs" />
     <Compile Include="EN\School\SAddress.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VM\Account\Enums\Medium.cs" />
+    <Compile Include="VM\Account\Enums\SBoard.cs" />
     <Compile Include="VM\Account\Enums\SchoolFType.cs" />
     <Compile Include="VM\Account\Enums\SchoolGType.cs" />
     <Compile Include="VM\Account\Enums\SClass.cs" />
+    <Compile Include="VM\Account\Enums\SSectionEnum.cs" />
     <Compile Include="VM\Account\Enums\State.cs" />
     <Compile Include="VM\Account\ExternalLoginConfirmationViewModel.cs" />
     <Compile Include="VM\Account\ExternalLoginListViewModel.cs" />
@@ -116,18 +120,21 @@
     <Compile Include="VM\Account\Manage\ManageLoginsViewModel.cs" />
     <Compile Include="VM\Account\Manage\SetPasswordViewModel.cs" />
     <Compile Include="VM\Account\Manage\VerifyPhoneNumberViewModel.cs" />
+    <Compile Include="VM\Account\RegistearAndLoginVM.cs" />
     <Compile Include="VM\Account\RegisterViewModel.cs" />
     <Compile Include="VM\Account\ResetPasswordViewModel.cs" />
+    <Compile Include="VM\Account\SchoolListVM.cs" />
+    <Compile Include="VM\Account\SchoolProfileModel.cs" />
     <Compile Include="VM\Account\SendCodeViewModel.cs" />
+    <Compile Include="VM\Account\SSectionVM.cs" />
     <Compile Include="VM\Account\VerifyCodeViewModel.cs" />
+    <Compile Include="VM\Account\SClassVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="EN\School\Enum\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

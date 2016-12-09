@@ -10,7 +10,8 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using SM.WEB.Models;
 using SM.LIB.VM.Account;
-
+using SM.LIB.EN.School;
+using SM.LIB.VM.Account.Enums;
 
 namespace SM.WEB.Controllers
 {
@@ -54,6 +55,80 @@ namespace SM.WEB.Controllers
             }
         }
 
+        public ActionResult SchoolProfileUpdate()
+        {
+            return View("SchoolProfileEdit");
+        }
+        [HttpPost]
+        public ActionResult SchoolProfileUpdate(SchoolProfileModel model)
+        {
+
+            return View("SchoolProfileEdit");
+        }
+        public ActionResult SchoolProfileView()
+        {
+            var context = new ApplicationDbContext();
+            var currentUser = User.Identity.GetUserName();
+            var model = UserManager.Users.First(m => m.UserName == currentUser);
+            var classAndSection = context.ClassAndSection.Find(currentUser);
+            SchoolProfileModel vm = new SchoolProfileModel()
+            {
+                AnnulDateOfExam = model.AnnulDateOfExam,
+                Board = model.Board,
+                CPName = model.CPName,
+                CPPhone = model.CPPhone,
+                EmailId = model.Email,
+                EstablishedDate = model.EstablishedDate,
+                Medium = model.Medium,
+                SAddress = model.SAddress,
+                SchoolFType = model.SchoolFType,
+                SchoolGType = model.SchoolGType,
+                SchoolName = model.Name,
+                SchoolPhoneNumber = model.SchoolPhoneNumber,
+                TotalStudents = model.TotalStudent
+            };
+            var cAndS = context.ClassAndSection.Where(c => c.SchoolId == currentUser).ToList();
+
+            var sectionList = cAndS.Select(s => new SSectionVM {
+                Name = s.SSection
+            });
+            var classList = cAndS.Select(s => new SClassVM
+            {
+                Name = s.SClass,
+                ListOfSection = sectionList
+            });
+            vm.ClassAndSections = classList;
+
+            return View("SchoolProfileView", vm);
+        }
+
+        public ActionResult SchoolList()
+        {
+            ApplicationDbContext context = ApplicationDbContext.Create();
+            var schoolList = context.Users.ToList();
+            //var userVM = schoolList.Select(user => new SchoolListVM
+            //{
+            //    Email = user.Email
+            //});
+            ViewBag.PageName = "Admin Section";
+
+            return View(schoolList);
+
+            //var allusers = context.Users.ToList();
+            //var users = allusers.Where(x => x.Roles.Select(role => role.Name).Contains("User")).ToList();
+            //var userVM = users.Select(user => new UserViewModel { Username = user.FullName, Roles = string.Join(",", user.Roles.Select(role => role.Name)) }).ToList();
+
+            //var admins = allusers.Where(x => x.Roles.Select(role => role.Name).Contains("Admin")).ToList();
+            //var adminsVM = admins.Select(user => new UserViewModel { Username = user.FullName, Roles = string.Join(",", user.Roles.Select(role => role.Name)) }).ToList();
+            //var model = new GroupedUserViewModel { Users = userVM, Admins = adminsVM };
+
+            //return View(model);
+
+
+
+        }
+
+
         //
         // GET: /Account/Login
         [AllowAnonymous]
@@ -77,7 +152,11 @@ namespace SM.WEB.Controllers
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var result = await SignInManager.PasswordSignInAsync(
+                model.Email,
+                model.Password,
+                model.RememberMe,
+                shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -153,7 +232,22 @@ namespace SM.WEB.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    CPName = model.CPName,
+                    CPPhone = model.CPPhone,
+                    Name = model.Name,
+                    Board = model.Board,
+                    TotalStudent = model.TotalStudent,
+                    SAddress = new SAddress {
+                        AddL1 = "Change it",
+                        City = model.City,
+                        Pin = 000000,
+                        state = State.ChangeIt
+                    },
+                    DateTime = DateTime.Now
+                };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -171,7 +265,7 @@ namespace SM.WEB.Controllers
             }
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            return View("Login",model);
         }
 
         //
