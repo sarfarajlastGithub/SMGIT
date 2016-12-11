@@ -34,6 +34,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -203,9 +204,19 @@
     <Compile Include="Migrations\201612092138486_AddClassAndSection.Designer.cs">
       <DependentUpon>201612092138486_AddClassAndSection.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612101532179_ChangingDateAttributeOnAspUser.cs" />
+    <Compile Include="Migrations\201612101532179_ChangingDateAttributeOnAspUser.Designer.cs">
+      <DependentUpon>201612101532179_ChangingDateAttributeOnAspUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612101605555_ChangingDateTimeFormateNulleble.cs" />
+    <Compile Include="Migrations\201612101605555_ChangingDateTimeFormateNulleble.Designer.cs">
+      <DependentUpon>201612101605555_ChangingDateTimeFormateNulleble.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
+    <Compile Include="Models\BL\AccountBL.cs" />
+    <Compile Include="Models\BL\CommentedClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -465,6 +476,8 @@
     <Content Include="Views\Shared\_LayoutEmptyInfo.cshtml" />
     <Content Include="Views\Account\SchoolProfileView.cshtml" />
     <Content Include="Views\Account\SchoolProfileEdit.cshtml" />
+    <Content Include="Views\Shared\_AddClassPartial.cshtml" />
+    <Content Include="Views\Account\ClassViewAndUpdate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -498,6 +511,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612092138486_AddClassAndSection.resx">
       <DependentUpon>201612092138486_AddClassAndSection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612101532179_ChangingDateAttributeOnAspUser.resx">
+      <DependentUpon>201612101532179_ChangingDateAttributeOnAspUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612101605555_ChangingDateTimeFormateNulleble.resx">
+      <DependentUpon>201612101605555_ChangingDateTimeFormateNulleble.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

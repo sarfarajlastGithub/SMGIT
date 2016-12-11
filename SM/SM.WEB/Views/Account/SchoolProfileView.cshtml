@@ -1,4 +1,5 @@
-﻿@{
+﻿@model SM.LIB.VM.Account.SchoolProfileModel
+@{
     bool val = Convert.ToBoolean(ViewBag.Complete);
     if (val)
     {
@@ -10,17 +11,85 @@
     }
 
 }
+<style>
+    .bigFont{
+        font-size:medium
+    }
+</style>
 
-<!DOCTYPE html>
+<div class="row">
+        <h2 class="page-head-title">School Profile</h2>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title></title>
-</head>
-<body>
-    <div>
+    <div class="col-sm-6">
+        <div class="panel panel-default panel-table">
+            <div style="background-color:aqua">
+                <div class="panel-heading bigFont">
+                    Basic Info
+                </div>
+            </div>
 
+            <div class="panel-body panel-border">
+                <div class="panel-heading">
+                    <div>@Html.LabelFor(m => m.SchoolName, new { @class = "bigFont" } ) : @Html.LabelForModel(Model.SchoolName, new { @class = "bigFont" })</div>
+                    <div>@Html.LabelFor(m => m.SchoolFType, new { @class = "bigFont" }) : @Html.LabelForModel(Model.SchoolFType.ToString(), new { @class = "bigFont" })</div>
+                    <div>@Html.LabelFor(m => m.SchoolGType, new { @class = "bigFont" }) : @Html.LabelForModel(Model.SchoolGType.ToString(), new { @class = "bigFont" })</div>
+                    <div>@Html.LabelFor(m => m.TotalStudents, new { @class = "bigFont" }) : @Html.LabelForModel(Model.TotalStudents.ToString(), new { @class = "bigFont" })</div>
+                </div>
+            </div>
+        </div>
     </div>
-</body>
-</html>
+    <div class="col-sm-6">
+        <div class="panel panel-default panel-table">
+            <div style="background-color:aqua">
+                <div class="panel-heading bigFont">
+                    Contact Info
+                </div>
+            </div>
+            <div class="panel-body panel-border">
+                <div class="panel-heading">
+                    <div>@Html.LabelFor(m => m.SchoolPhoneNumber, new { @class = "bigFont" }) : @Html.LabelForModel(Model.SchoolPhoneNumber.ToString(), new { @class = "bigFont" })</div>
+                    <div>@Html.LabelFor(m => m.EmailId, new { @class = "bigFont" }) : @Html.LabelForModel(Model.EmailId, new { @class = "bigFont" })</div>
+                    <div>@Html.LabelFor(m => m.CPName, new { @class = "bigFont" }) : @Html.LabelForModel(Model.CPName, new { @class = "bigFont" })</div>
+                    <div>@Html.LabelFor(m => m.CPPhone, new { @class = "bigFont" }) : @Html.LabelForModel(Model.CPPhone, new { @class = "bigFont" })</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-6">
+        <div class="panel panel-default panel-table">
+            <div style="background-color:aqua">
+                <div class="panel-heading bigFont">
+                    Address
+                </div>
+            </div>
+            <div class="panel-body panel-border">
+                <div class="panel-heading">
+                    <div>@Html.LabelFor(m => m.SAddress.AddL1, new { @class = "bigFont" }) : @Html.LabelForModel(Model.SAddress.AddL1, new { @class = "bigFont" })</div>
+                    <div>@Html.LabelFor(m => m.SAddress.AddL2, new { @class = "bigFont" }) : @Html.LabelForModel(Model.SAddress.AddL2, new { @class = "bigFont" })</div>
+                    <div>@Html.LabelFor(m => m.SAddress.City, new { @class = "bigFont" }) : @Html.LabelForModel(Model.SAddress.City.ToString(), new { @class = "bigFont" })</div>
+                    <div>@Html.LabelFor(m => m.SAddress.Pin, new { @class = "bigFont" }) : @Html.LabelForModel(Model.SAddress.Pin.ToString(), new { @class = "bigFont" })</div>
+                    <div>@Html.LabelFor(m => m.SAddress.state, new { @class = "bigFont" }) : @Html.LabelForModel(Model.SAddress.state.ToString(), new { @class = "bigFont" })</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="panel panel-default panel-table">
+            <div style="background-color:aqua">
+                <div class="panel-heading bigFont">
+                    Academic Info
+                </div>
+            </div>
+            <div class="panel-body panel-border">
+                <div class="panel-heading">
+                    <div>@Html.LabelFor(m => m.Board, new { @class = "bigFont" }) : @Html.LabelForModel(Model.Board.ToString(), new { @class = "bigFont" })</div>
+                    <div>@Html.LabelFor(m => m.AnnulDateOfExam, new { @class = "bigFont" }) : @Html.LabelForModel(Model.AnnulDateOfExam.ToString(), new { @class = "bigFont" })</div>
+                    <div>@Html.LabelFor(m => m.Medium, new { @class = "bigFont" }) : @Html.LabelForModel(Model.Medium.ToString(), new { @class = "bigFont" })</div>
+                    <div>@Html.LabelFor(m => m.EstablishedDate, new { @class = "bigFont" }) : @Html.LabelForModel(Model.EstablishedDate.ToString(), new { @class = "bigFont" })</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

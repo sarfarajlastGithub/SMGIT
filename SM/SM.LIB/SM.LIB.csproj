@@ -20,6 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -125,6 +126,7 @@
     <Compile Include="VM\Account\ResetPasswordViewModel.cs" />
     <Compile Include="VM\Account\SchoolListVM.cs" />
     <Compile Include="VM\Account\SchoolProfileModel.cs" />
+    <Compile Include="VM\Account\SClassPresentVM.cs" />
     <Compile Include="VM\Account\SendCodeViewModel.cs" />
     <Compile Include="VM\Account\SSectionVM.cs" />
     <Compile Include="VM\Account\VerifyCodeViewModel.cs" />

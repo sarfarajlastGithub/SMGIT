@@ -45,18 +45,23 @@ namespace SM.LIB.VM.Account
         public SBoard Board { get; set; }
 
         [Display(Name = "Annual Date of Examination")]
-        public DateTime AnnulDateOfExam { get; set; }
+        public DateTime? AnnulDateOfExam { get; set; }
 
         [Required]
         public Medium Medium { get; set; }
 
         [Display(Name = "Established Date")]
-        public DateTime EstablishedDate { get; set; }
+        public DateTime? EstablishedDate { get; set; }
 
         public IEnumerable<SClassVM> ClassAndSections { get; set; }
         public SClassVM ClassAndSection { get; set; }
 
         public SAddress SAddress { get; set; }
+
+        public SClassPresentVM SClassPresentVM { get; set; }
+
+        public SClass SClassEnum { get; set; }
+        public SSectionEnum SSectionEnum { get; set; }
     }
 
 }

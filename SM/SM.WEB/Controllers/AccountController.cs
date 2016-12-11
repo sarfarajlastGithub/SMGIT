@@ -57,20 +57,12 @@ namespace SM.WEB.Controllers
 
         public ActionResult SchoolProfileUpdate()
         {
-            return View("SchoolProfileEdit");
-        }
-        [HttpPost]
-        public ActionResult SchoolProfileUpdate(SchoolProfileModel model)
-        {
+            ViewBag.PageTitle = "Update Profile";
 
-            return View("SchoolProfileEdit");
-        }
-        public ActionResult SchoolProfileView()
-        {
-            var context = new ApplicationDbContext();
             var currentUser = User.Identity.GetUserName();
             var model = UserManager.Users.First(m => m.UserName == currentUser);
-            var classAndSection = context.ClassAndSection.Find(currentUser);
+            var addressId = model.SAddressId;
+
             SchoolProfileModel vm = new SchoolProfileModel()
             {
                 AnnulDateOfExam = model.AnnulDateOfExam,
@@ -86,46 +78,135 @@ namespace SM.WEB.Controllers
                 SchoolName = model.Name,
                 SchoolPhoneNumber = model.SchoolPhoneNumber,
                 TotalStudents = model.TotalStudent
+
             };
-            var cAndS = context.ClassAndSection.Where(c => c.SchoolId == currentUser).ToList();
+            var addressModel = ApplicationDbContext.Create().SAddresses.First(a => a.Id == addressId);
 
-            var sectionList = cAndS.Select(s => new SSectionVM {
-                Name = s.SSection
-            });
-            var classList = cAndS.Select(s => new SClassVM
+            vm.SAddress = new SAddress
             {
-                Name = s.SClass,
-                ListOfSection = sectionList
-            });
-            vm.ClassAndSections = classList;
+                AddL1 = addressModel.AddL1,
+                AddL2 = addressModel.AddL2,
+                City = addressModel.City,
+                Pin = addressModel.Pin,
+                state = addressModel.state
+            };
 
-            return View("SchoolProfileView", vm);
+
+
+            return View("SchoolProfileEdit", vm);
+        }
+        [HttpPost]
+        public ActionResult SchoolProfileUpdate(SchoolProfileModel model)
+        {
+            ViewBag.PageTitle = "Update Profile";
+
+            var currentUser = User.Identity.GetUserName();
+            var user = UserManager.Users.First(m => m.UserName == currentUser);
+            //ApplicationUser user
+            var addressId = user.SAddressId;
+
+
+            user.AnnulDateOfExam = model.AnnulDateOfExam;
+            user.Board = model.Board;
+            user.CPName = model.CPName;
+            user.CPPhone = model.CPPhone;
+            user.EstablishedDate = model.EstablishedDate;
+            user.Medium = model.Medium;
+            user.SAddress = model.SAddress;
+            user.SchoolFType = model.SchoolFType;
+            user.SchoolGType = model.SchoolGType;
+            user.UserName = model.EmailId;
+            user.SchoolPhoneNumber = model.SchoolPhoneNumber;
+            user.TotalStudent = model.TotalStudents;
+
+
+            var result  = UserManager.Update(user);
+
+            var context = ApplicationDbContext.Create();
+            var addressModel = context.SAddresses.First(a => a.Id == addressId);
+
+            addressModel.AddL1 = model.SAddress.AddL1;
+            addressModel.AddL2 = model.SAddress.AddL2;
+            addressModel.City = model.SAddress.City;
+            addressModel.Pin = model.SAddress.Pin;
+            addressModel.state = model.SAddress.state;
+            context.SaveChanges();
+
+            if(result.Succeeded)
+            {
+                return RedirectToAction("SchoolProfileUpdate");
+            }
+            else
+            {
+                return View(model);
+            }
+
+
+        }
+
+        public ActionResult AddClassAndSection(SchoolProfileModel model)
+        {
+            var currentUser = User.Identity.GetUserName();
+            //var user = UserManager.Users.First(m => m.UserName == currentUser);
+            //ApplicationUser user
+            var cls = model.SClassEnum;
+            var sec = model.SSectionEnum;
+
+            return PartialView("_AddClassPartial",model);
+        }
+
+        public ActionResult SchoolProfileView()
+        {
+            var currentUser = User.Identity.GetUserName();
+            var model = UserManager.Users.First(m => m.UserName == currentUser);
+            var addressId = model.SAddressId;
+            var context = ApplicationDbContext.Create();
+            var addressModel = context.SAddresses.First(a => a.Id == addressId);
+            SchoolProfileModel vm = new SchoolProfileModel()
+            {
+                AnnulDateOfExam = model.AnnulDateOfExam,
+                Board = model.Board,
+                CPName = model.CPName,
+                CPPhone = model.CPPhone,
+                EmailId = model.Email,
+                EstablishedDate = model.EstablishedDate,
+                Medium = model.Medium,
+                SchoolFType = model.SchoolFType,
+                SchoolGType = model.SchoolGType,
+                SchoolName = model.Name,
+                SchoolPhoneNumber = model.SchoolPhoneNumber,
+                TotalStudents = model.TotalStudent,
+                SAddress = new SAddress
+                {
+                    AddL1 = addressModel.AddL1,
+                    AddL2 = addressModel.AddL2,
+                    City = addressModel.City,
+                    Pin = addressModel.Pin,
+                    state = addressModel.state
+                }
+        };
+
+
+
+            return View(vm);
+        }
+
+        /// <summary>
+        /// Here All class View and Update
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult ClassViewAndUpdate()
+        {
+            return View();
         }
 
         public ActionResult SchoolList()
         {
             ApplicationDbContext context = ApplicationDbContext.Create();
             var schoolList = context.Users.ToList();
-            //var userVM = schoolList.Select(user => new SchoolListVM
-            //{
-            //    Email = user.Email
-            //});
             ViewBag.PageName = "Admin Section";
 
             return View(schoolList);
-
-            //var allusers = context.Users.ToList();
-            //var users = allusers.Where(x => x.Roles.Select(role => role.Name).Contains("User")).ToList();
-            //var userVM = users.Select(user => new UserViewModel { Username = user.FullName, Roles = string.Join(",", user.Roles.Select(role => role.Name)) }).ToList();
-
-            //var admins = allusers.Where(x => x.Roles.Select(role => role.Name).Contains("Admin")).ToList();
-            //var adminsVM = admins.Select(user => new UserViewModel { Username = user.FullName, Roles = string.Join(",", user.Roles.Select(role => role.Name)) }).ToList();
-            //var model = new GroupedUserViewModel { Users = userVM, Admins = adminsVM };
-
-            //return View(model);
-
-
-
         }
 
 
@@ -160,7 +241,20 @@ namespace SM.WEB.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    {
+                        var currentUser = User.Identity.GetUserName();
+                        var user = UserManager.Users.First(m => m.UserName == currentUser);
+                        //bool isComplete = user.IsComplete;
+                        if (user.IsComplete)
+                        {
+                            returnUrl = "SchoolProfileUpdate";
+                        }
+                        else
+                        {
+                            returnUrl = "SchoolProfileUpdate";
+                        }
+                    }
+                    return RedirectToAction(returnUrl,"Account");
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -246,9 +340,12 @@ namespace SM.WEB.Controllers
                         Pin = 000000,
                         state = State.ChangeIt
                     },
-                    DateTime = DateTime.Now
+                    RegistarDate = DateTime.Now
                 };
+
                 var result = await UserManager.CreateAsync(user, model.Password);
+
+
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
@@ -259,7 +356,7 @@ namespace SM.WEB.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("SchoolProfileUpdate", "Account");
                 }
                 AddErrors(result);
             }

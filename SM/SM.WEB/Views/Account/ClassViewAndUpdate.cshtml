@@ -1,0 +1,26 @@
+﻿@model SM.LIB.VM.Account.SchoolProfileModel
+@{
+    bool val = Convert.ToBoolean(ViewBag.Complete);
+    if (val)
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_LayoutEmptyInfo.cshtml";
+    }
+
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <div>
+
+    </div>
+</body>
+</html>
