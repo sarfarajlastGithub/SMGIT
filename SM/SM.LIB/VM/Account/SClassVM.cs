@@ -12,6 +12,5 @@ namespace SM.LIB.VM.Account
         public SClass Name { get; set; }
 
         public IEnumerable<SSectionVM> ListOfSection { get; set; }
-        public SSectionVM SSectionName { get; set; }
     }
 }

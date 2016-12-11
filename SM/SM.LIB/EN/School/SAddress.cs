@@ -30,5 +30,6 @@ namespace SM.LIB.EN.School
 
         [Required]
         public State state { get; set; }
+        public string SchoolProfileId { get; set; }
     }
 }

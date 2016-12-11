@@ -7,13 +7,13 @@ namespace SM.WEB.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class AddDateTime : IMigrationMetadata
+    public sealed partial class FewChanges : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddDateTime));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(FewChanges));
         
         string IMigrationMetadata.Id
         {
-            get { return "201612091450024_AddDateTime"; }
+            get { return "201612111329117_FewChanges"; }
         }
         
         string IMigrationMetadata.Source

@@ -184,33 +184,17 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201612091434556_InitialAfterHavingProb.cs" />
-    <Compile Include="Migrations\201612091434556_InitialAfterHavingProb.Designer.cs">
-      <DependentUpon>201612091434556_InitialAfterHavingProb.cs</DependentUpon>
+    <Compile Include="Migrations\201612111044589_InitialAfterChanges.cs" />
+    <Compile Include="Migrations\201612111044589_InitialAfterChanges.Designer.cs">
+      <DependentUpon>201612111044589_InitialAfterChanges.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201612091450024_AddDateTime.cs" />
-    <Compile Include="Migrations\201612091450024_AddDateTime.Designer.cs">
-      <DependentUpon>201612091450024_AddDateTime.cs</DependentUpon>
+    <Compile Include="Migrations\201612111329117_FewChanges.cs" />
+    <Compile Include="Migrations\201612111329117_FewChanges.Designer.cs">
+      <DependentUpon>201612111329117_FewChanges.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201612091625449_AddIsCompleteToApUser.cs" />
-    <Compile Include="Migrations\201612091625449_AddIsCompleteToApUser.Designer.cs">
-      <DependentUpon>201612091625449_AddIsCompleteToApUser.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612092042114_fewDataChanges.cs" />
-    <Compile Include="Migrations\201612092042114_fewDataChanges.Designer.cs">
-      <DependentUpon>201612092042114_fewDataChanges.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612092138486_AddClassAndSection.cs" />
-    <Compile Include="Migrations\201612092138486_AddClassAndSection.Designer.cs">
-      <DependentUpon>201612092138486_AddClassAndSection.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612101532179_ChangingDateAttributeOnAspUser.cs" />
-    <Compile Include="Migrations\201612101532179_ChangingDateAttributeOnAspUser.Designer.cs">
-      <DependentUpon>201612101532179_ChangingDateAttributeOnAspUser.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612101605555_ChangingDateTimeFormateNulleble.cs" />
-    <Compile Include="Migrations\201612101605555_ChangingDateTimeFormateNulleble.Designer.cs">
-      <DependentUpon>201612101605555_ChangingDateTimeFormateNulleble.cs</DependentUpon>
+    <Compile Include="Migrations\201612111727120_FewChanges1.cs" />
+    <Compile Include="Migrations\201612111727120_FewChanges1.Designer.cs">
+      <DependentUpon>201612111727120_FewChanges1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
@@ -497,26 +481,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201612091434556_InitialAfterHavingProb.resx">
-      <DependentUpon>201612091434556_InitialAfterHavingProb.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201612111044589_InitialAfterChanges.resx">
+      <DependentUpon>201612111044589_InitialAfterChanges.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612091450024_AddDateTime.resx">
-      <DependentUpon>201612091450024_AddDateTime.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201612111329117_FewChanges.resx">
+      <DependentUpon>201612111329117_FewChanges.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612091625449_AddIsCompleteToApUser.resx">
-      <DependentUpon>201612091625449_AddIsCompleteToApUser.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612092042114_fewDataChanges.resx">
-      <DependentUpon>201612092042114_fewDataChanges.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612092138486_AddClassAndSection.resx">
-      <DependentUpon>201612092138486_AddClassAndSection.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612101532179_ChangingDateAttributeOnAspUser.resx">
-      <DependentUpon>201612101532179_ChangingDateAttributeOnAspUser.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612101605555_ChangingDateTimeFormateNulleble.resx">
-      <DependentUpon>201612101605555_ChangingDateTimeFormateNulleble.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201612111727120_FewChanges1.resx">
+      <DependentUpon>201612111727120_FewChanges1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

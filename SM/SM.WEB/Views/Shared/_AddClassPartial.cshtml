@@ -1,46 +1,42 @@
-﻿@model SM.LIB.VM.Account.SchoolProfileModel
-<div id="addClassDiv">
+﻿@model SM.LIB.VM.Account.ClassViewAndUpdateModel
 
-    @using (Ajax.BeginForm("AddClassAndSection", "Account", new AjaxOptions
-    {
-        HttpMethod = "Get",
-        InsertionMode = InsertionMode.Replace,
-        UpdateTargetId = "shoeClassSectionListDiv"
-    }))
-    {
-        <div class="form-group">
-            <div class="col-sm-4">
-                <div class="col-sm-4">
-                    <label class="control-label">Class</label>
-                    @Html.EnumDropDownListFor(m => m.SClassEnum, "Select Class", new { @class = "form-control", placeholder = "Date" })
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <label class="control-label">Keywords</label>
-                <p>Write your Section according to class</p>
-                @Html.EnumDropDownListFor(m => m.SSectionEnum, "Type A", new { @class = "tag form-control", multipl = "multiple" })
-
-            </div>
-            <div class="col-sm-offset-2 col-sm-2">
-                @*<button data-wizard="#wizard1" class="btn btn-primary btn-space wizard-next">Next Step</button>*@
-                <input type="submit" @*style="margin-left:25%"*@ data-wizard="#wizard1" class="btn btn-primary btn-space wizard-next" value="Add">
+<div id="clasajaxLoad" class="col-sm-5">
+    <div class="panel panel-default panel-table">
+        <div style="background-color:dodgerblue">
+            <div class="panel-heading bigFont">
+                Selected Class and Section
             </div>
         </div>
-    }
-    <!--One Class With Section End-->
-    <div id="shoeClassSectionListDiv"></div>
-    <div class="form-group">
-        <label class="control-label">Selected Class and Section</label>
-        <div class="col-sm-4">
-            <label class="control-label">Class list</label>
-        </div>
-        <div class="col-sm-8">
-            <label class="control-label">Section list</label>
-        </div>
+        <div class="panel-body panel-border">
+            <div class="panel-heading">
+                @if (Model.SClassList != null)
+                {
+                    foreach (var sclass in Model.SClassList)
+                    {
+                        <div class="col-sm-4">
+                            <label class="control-label">@sclass.Name</label>
+                        </div>
+                            <div class="col-sm-8">
+                                @foreach (var ssec in sclass.ListOfSection)
+                                {
+                                    <label class="control-label">@ssec.Name</label>
+                                }
+                            </div>
+                    }
+                }
+                else
+                {
+                    <div class="col-sm-4">
+                        <label class="control-label">No Class has been Added</label>
+                    </div>
+                        <div class="col-sm-8">
+                            <label class="control-label">No Section</label>
+                        </div>
+                        <h4>PLease Add Class and Sections accordingly</h4>
+                }
 
 
+            </div>
+        </div>
     </div>
-
-
-
 </div>

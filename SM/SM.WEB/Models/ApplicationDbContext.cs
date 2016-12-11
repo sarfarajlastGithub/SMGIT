@@ -30,6 +30,7 @@ namespace SM.WEB.Models
             return new ApplicationDbContext();
         }
 
+        public DbSet<SchoolProfile> SchoolProfile { get; set; }
         public DbSet<ClassAndSection> ClassAndSection { get; set; }
         public DbSet<SAddress> SAddresses { get; set; }
     }

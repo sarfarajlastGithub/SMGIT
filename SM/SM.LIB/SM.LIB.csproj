@@ -99,6 +99,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EN\School\ClassAndSection.cs" />
+    <Compile Include="EN\School\SchoolProfile.cs" />
+    <Compile Include="VM\Account\ClassViewAndUpdateModel.cs" />
     <Compile Include="VM\Account\Enums\City.cs" />
     <Compile Include="EN\School\SAddress.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -131,6 +133,9 @@
     <Compile Include="VM\Account\SSectionVM.cs" />
     <Compile Include="VM\Account\VerifyCodeViewModel.cs" />
     <Compile Include="VM\Account\SClassVM.cs" />
+    <Compile Include="VM\DateTimeConvert.cs" />
+    <Compile Include="VM\EnumUtil.cs" />
+    <Compile Include="VM\PasswordHash.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

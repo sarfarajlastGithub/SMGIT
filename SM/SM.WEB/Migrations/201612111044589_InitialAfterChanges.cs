@@ -3,10 +3,66 @@ namespace SM.WEB.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialAfterHavingProb : DbMigration
+    public partial class InitialAfterChanges : DbMigration
     {
         public override void Up()
         {
+            CreateTable(
+                "dbo.ClassAndSections",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        SchoolProfileId = c.Int(nullable: false),
+                        SClass = c.Int(nullable: false),
+                        SSection = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.SchoolProfiles", t => t.SchoolProfileId, cascadeDelete: true)
+                .Index(t => t.SchoolProfileId);
+            
+            CreateTable(
+                "dbo.SchoolProfiles",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        UserName = c.String(),
+                        SAddressId = c.Int(nullable: false),
+                        Name = c.String(),
+                        Email = c.String(),
+                        Password = c.String(),
+                        CPName = c.String(),
+                        CPPhone = c.String(),
+                        Board = c.Int(nullable: false),
+                        TotalStudent = c.Int(nullable: false),
+                        SchoolFType = c.Int(nullable: false),
+                        SchoolGType = c.Int(nullable: false),
+                        SClass = c.Int(nullable: false),
+                        RegistarDate = c.DateTime(nullable: false),
+                        IsComplete = c.Boolean(nullable: false),
+                        LastUpdatedDate = c.DateTime(nullable: false),
+                        SchoolPhoneNumber = c.Int(nullable: false),
+                        AnnulDateOfExam = c.DateTime(nullable: false),
+                        Medium = c.Int(nullable: false),
+                        EstablishedDate = c.DateTime(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.SAddresses", t => t.SAddressId, cascadeDelete: true)
+                .Index(t => t.SAddressId);
+            
+            CreateTable(
+                "dbo.SAddresses",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        AddL1 = c.String(nullable: false, maxLength: 300),
+                        AddL2 = c.String(maxLength: 300),
+                        Pin = c.Int(nullable: false),
+                        City = c.Int(nullable: false),
+                        state = c.Int(nullable: false),
+                        SchoolUserName = c.String(),
+                    })
+                .PrimaryKey(t => t.Id);
+            
             CreateTable(
                 "dbo.AspNetRoles",
                 c => new
@@ -31,32 +87,11 @@ namespace SM.WEB.Migrations
                 .Index(t => t.RoleId);
             
             CreateTable(
-                "dbo.SAddresses",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        AddL1 = c.String(),
-                        AddL2 = c.String(),
-                        Pin = c.Int(nullable: false),
-                        City = c.Int(nullable: false),
-                        state = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id);
-            
-            CreateTable(
                 "dbo.AspNetUsers",
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128),
-                        Name = c.String(),
-                        CPName = c.String(),
-                        CPPhone = c.String(),
-                        Board = c.Int(nullable: false),
-                        TotalStudent = c.Int(nullable: false),
-                        schoolFType = c.Int(nullable: false),
-                        schoolGType = c.Int(nullable: false),
-                        sClass = c.Int(nullable: false),
-                        sAddressId = c.Int(nullable: false),
+                        IsComplete = c.Boolean(nullable: false),
                         Email = c.String(maxLength: 256),
                         EmailConfirmed = c.Boolean(nullable: false),
                         PasswordHash = c.String(),
@@ -70,8 +105,6 @@ namespace SM.WEB.Migrations
                         UserName = c.String(nullable: false, maxLength: 256),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.SAddresses", t => t.sAddressId, cascadeDelete: true)
-                .Index(t => t.sAddressId)
                 .Index(t => t.UserName, unique: true, name: "UserNameIndex");
             
             CreateTable(
@@ -103,24 +136,28 @@ namespace SM.WEB.Migrations
         
         public override void Down()
         {
-            DropForeignKey("dbo.AspNetUsers", "sAddressId", "dbo.SAddresses");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
+            DropForeignKey("dbo.ClassAndSections", "SchoolProfileId", "dbo.SchoolProfiles");
+            DropForeignKey("dbo.SchoolProfiles", "SAddressId", "dbo.SAddresses");
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
-            DropIndex("dbo.AspNetUsers", new[] { "sAddressId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
+            DropIndex("dbo.SchoolProfiles", new[] { "SAddressId" });
+            DropIndex("dbo.ClassAndSections", new[] { "SchoolProfileId" });
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
-            DropTable("dbo.SAddresses");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
+            DropTable("dbo.SAddresses");
+            DropTable("dbo.SchoolProfiles");
+            DropTable("dbo.ClassAndSections");
         }
     }
 }

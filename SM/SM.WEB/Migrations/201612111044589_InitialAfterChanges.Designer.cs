@@ -7,13 +7,13 @@ namespace SM.WEB.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class AddIsCompleteToApUser : IMigrationMetadata
+    public sealed partial class InitialAfterChanges : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddIsCompleteToApUser));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialAfterChanges));
         
         string IMigrationMetadata.Id
         {
-            get { return "201612091625449_AddIsCompleteToApUser"; }
+            get { return "201612111044589_InitialAfterChanges"; }
         }
         
         string IMigrationMetadata.Source

@@ -44,14 +44,14 @@ namespace SM.LIB.VM.Account
         [Required]
         public SBoard Board { get; set; }
 
-        [Display(Name = "Annual Date of Examination")]
-        public DateTime? AnnulDateOfExam { get; set; }
+        [Display(Name = "Month of Financial Year")]
+        public string AnnulDateOfExam { get; set; }
 
         [Required]
         public Medium Medium { get; set; }
 
         [Display(Name = "Established Date")]
-        public DateTime? EstablishedDate { get; set; }
+        public string EstablishedDate { get; set; }
 
         public IEnumerable<SClassVM> ClassAndSections { get; set; }
         public SClassVM ClassAndSection { get; set; }
@@ -62,6 +62,8 @@ namespace SM.LIB.VM.Account
 
         public SClass SClassEnum { get; set; }
         public SSectionEnum SSectionEnum { get; set; }
+
+
     }
 
 }
