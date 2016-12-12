@@ -27,10 +27,10 @@ namespace SM.LIB.EN.School
         public SClass SClass { get; set; }
         public DateTime RegistarDate { get; set; }
         public bool IsComplete { get; set; }
-        public DateTime LastUpdatedDate { get; set; }
+        public DateTime? LastUpdatedDate { get; set; }
         public int SchoolPhoneNumber { get; set; }
-        public DateTime AnnulDateOfExam { get; set; }
+        public DateTime? AnnulDateOfExam { get; set; }
         public Medium Medium { get; set; }
-        public DateTime EstablishedDate { get; set; }
+        public DateTime? EstablishedDate { get; set; }
     }
 }

@@ -555,9 +555,6 @@ namespace SM.WEB.Controllers
                     Board = model.Board,
                     TotalStudent = model.TotalStudent,
                     RegistarDate = DateTime.Now,
-                    LastUpdatedDate = DateTime.Now,
-                    AnnulDateOfExam = DateTime.Now,
-                    EstablishedDate = DateTime.Now,
                     SAddress = new SAddress
                     {
                         AddL1 = "Change it",

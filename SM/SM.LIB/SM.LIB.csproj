@@ -98,8 +98,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EN\Fee\FeeAccount.cs" />
     <Compile Include="EN\School\ClassAndSection.cs" />
     <Compile Include="EN\School\SchoolProfile.cs" />
+    <Compile Include="EN\Student\StudentProfile.cs" />
+    <Compile Include="EN\Student\StudentReg.cs" />
+    <Compile Include="EN\Tenure\TenureHoliday.cs" />
+    <Compile Include="EN\Tenure\TenureTime.cs" />
     <Compile Include="VM\Account\ClassViewAndUpdateModel.cs" />
     <Compile Include="VM\Account\Enums\City.cs" />
     <Compile Include="EN\School\SAddress.cs" />
@@ -111,6 +116,7 @@
     <Compile Include="VM\Account\Enums\SClass.cs" />
     <Compile Include="VM\Account\Enums\SSectionEnum.cs" />
     <Compile Include="VM\Account\Enums\State.cs" />
+    <Compile Include="VM\Account\Enums\TenureYear.cs" />
     <Compile Include="VM\Account\ExternalLoginConfirmationViewModel.cs" />
     <Compile Include="VM\Account\ExternalLoginListViewModel.cs" />
     <Compile Include="VM\Account\ForgotPasswordViewModel.cs" />
@@ -136,12 +142,17 @@
     <Compile Include="VM\DateTimeConvert.cs" />
     <Compile Include="VM\EnumUtil.cs" />
     <Compile Include="VM\PasswordHash.cs" />
+    <Compile Include="VM\Student\Enum\Gender.cs" />
+    <Compile Include="VM\Student\Enum\Qualification.cs" />
+    <Compile Include="VM\Student\Enum\Relation.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="EN\Account\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

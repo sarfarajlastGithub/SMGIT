@@ -196,6 +196,10 @@
     <Compile Include="Migrations\201612111727120_FewChanges1.Designer.cs">
       <DependentUpon>201612111727120_FewChanges1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612122124339_NewUserTableAdded.cs" />
+    <Compile Include="Migrations\201612122124339_NewUserTableAdded.Designer.cs">
+      <DependentUpon>201612122124339_NewUserTableAdded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -489,6 +493,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612111727120_FewChanges1.resx">
       <DependentUpon>201612111727120_FewChanges1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612122124339_NewUserTableAdded.resx">
+      <DependentUpon>201612122124339_NewUserTableAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

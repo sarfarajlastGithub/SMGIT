@@ -8,17 +8,18 @@ namespace SM.LIB.VM
 {
     public class DateTimeConvert
     {
-        public static DateTime GetDate(string date)
+        public static DateTime? GetDate(string date)
         {
-            DateTime datee = Convert.ToDateTime(date);
+            DateTime? datee = Convert.ToDateTime(date);
             return datee;
         }
 
-        public static string GetString(DateTime date)
+        public static string GetString(DateTime? date)
         {
-            //DateTime datee = date;
-            string dates = date.ToString("dd MMMM, yyyy");
+            string dates = date.HasValue ? date.Value.ToString("dd MMMM, yyyy") : string.Empty;
             return dates;
         }
+
+
     }
 }
