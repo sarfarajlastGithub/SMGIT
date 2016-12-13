@@ -8,16 +8,10 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using SM.WEB.Models;
-using SM.LIB.VM.Account;
-using SM.LIB.EN.School;
-using SM.LIB.VM.Account.Enums;
-using SM.LIB.VM;
-using System.Security.Cryptography;
-using System.Collections.Generic;
-using SM.LIB.EN.DB;
+using WebApplication1.Models;
+using ClassLibrary1;
 
-namespace SM.WEB.Controllers
+namespace WebApplication1.Controllers
 {
     [Authorize]
     public class AccountController : Controller
@@ -29,7 +23,7 @@ namespace SM.WEB.Controllers
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -59,358 +53,6 @@ namespace SM.WEB.Controllers
             }
         }
 
-        public ActionResult SchoolProfileUpdate()
-        {
-            ViewBag.PageTitle = "Update Profile";
-            ViewBag.Complete = LayoutSelector();
-            var currentUserId = User.Identity.GetUserId();
-            var context = new AppContext();
-            var model = context.SchoolProfile.First(m => m.UserId == currentUserId);
-
-            //var model = UserManager.Users.First(m => m.UserName == currentUser);
-            var addressId = model.SAddressId;
-
-            SchoolProfileModel vm = new SchoolProfileModel()
-            {
-                AnnulDateOfExam = DateTimeConvert.GetString(model.AnnulDateOfExam),
-                Board = model.Board,
-                CPName = model.CPName,
-                CPPhone = model.CPPhone,
-                EmailId = model.Email,
-                EstablishedDate = DateTimeConvert.GetString(model.EstablishedDate),
-                Medium = model.Medium,
-                SAddress = model.SAddress,
-                SchoolFType = model.SchoolFType,
-                SchoolGType = model.SchoolGType,
-                SchoolName = model.Name,
-                SchoolPhoneNumber = model.SchoolPhoneNumber,
-                TotalStudents = model.TotalStudent
-
-            };
-            var addressModel = context.SAddresses.First(a => a.Id == addressId);
-
-            vm.SAddress = new SAddress
-            {
-                AddL1 = addressModel.AddL1,
-                AddL2 = addressModel.AddL2,
-                City = addressModel.City,
-                Pin = addressModel.Pin,
-                state = addressModel.state
-            };
-
-
-
-            return View("SchoolProfileEdit", vm);
-        }
-        [HttpPost]
-        public ActionResult SchoolProfileUpdate(SchoolProfileModel model)
-        {
-            ViewBag.PageTitle = "Update Profile";
-            ViewBag.Complete = LayoutSelector();
-            var currentUserId = User.Identity.GetUserId();
-            var context = new AppContext();
-            var user = context.SchoolProfile.First(m => m.UserId == currentUserId);
-
-            //var user = UserManager.Users.First(m => m.UserName == currentUser);
-            //ApplicationUser user
-            var addressId = user.SAddressId;
-            user.AnnulDateOfExam = DateTimeConvert.GetDate(model.AnnulDateOfExam);
-            user.Board = model.Board;
-            user.CPName = model.CPName;
-            user.CPPhone = model.CPPhone;
-            user.EstablishedDate = DateTimeConvert.GetDate(model.EstablishedDate);
-            user.Medium = model.Medium;
-            user.SAddress = model.SAddress;
-            user.SchoolFType = model.SchoolFType;
-            user.SchoolGType = model.SchoolGType;
-            user.UserName = model.EmailId;
-            user.SchoolPhoneNumber = model.SchoolPhoneNumber;
-            user.TotalStudent = model.TotalStudents;
-
-
-            var result = context.SaveChanges();
-
-            var addressModel = context.SAddresses.First(a => a.Id == addressId);
-
-            addressModel.AddL1 = model.SAddress.AddL1;
-            addressModel.AddL2 = model.SAddress.AddL2;
-            addressModel.City = model.SAddress.City;
-            addressModel.Pin = model.SAddress.Pin;
-            addressModel.state = model.SAddress.state;
-            context.SaveChanges();
-
-            return RedirectToAction("SchoolProfileView");
-
-
-        }
-
-        public ActionResult AddClassAndSection(SchoolProfileModel model)
-        {
-            var currentUser = User.Identity.GetUserName();
-            //var user = UserManager.Users.First(m => m.UserName == currentUser);
-            //ApplicationUser user
-            var cls = model.SClassEnum;
-            var sec = model.SSectionEnum;
-
-            return PartialView("_AddClassPartial", model);
-        }
-
-        public ActionResult SchoolProfileView()
-        {
-            var currentUserId = User.Identity.GetUserId();
-
-            var context = new AppContext();
-            var model = context.SchoolProfile.First(m => m.UserId == currentUserId);
-            var addressId = model.SAddressId;
-            var addressModel = context.SAddresses.First(a => a.Id == addressId);
-            SchoolProfileModel vm = new SchoolProfileModel()
-            {
-                AnnulDateOfExam = DateTimeConvert.GetString(model.AnnulDateOfExam),
-                Board = model.Board,
-                CPName = model.CPName,
-                CPPhone = model.CPPhone,
-                EmailId = model.Email,
-                EstablishedDate = model.EstablishedDate.ToString(),
-                Medium = model.Medium,
-                SchoolFType = model.SchoolFType,
-                SchoolGType = model.SchoolGType,
-                SchoolName = model.Name,
-                SchoolPhoneNumber = model.SchoolPhoneNumber,
-                TotalStudents = model.TotalStudent,
-                SAddress = new SAddress
-                {
-                    AddL1 = addressModel.AddL1,
-                    AddL2 = addressModel.AddL2,
-                    City = addressModel.City,
-                    Pin = addressModel.Pin,
-                    state = addressModel.state
-                }
-            };
-
-
-
-            return View(vm);
-        }
-
-
-        public bool LayoutSelector()
-        {
-            var crid = User.Identity.GetUserId();
-            var context = new AppContext();
-
-            var userr = context.SchoolProfile.First(p => p.UserId == crid);
-            return userr.IsComplete;
-        }
-
-
-        /// <summary>
-        /// Here All class View and Update
-        /// </summary>
-        /// <returns></returns>
-        public ActionResult ClassViewAndUpdate()
-        {
-            ViewBag.Complete = LayoutSelector();
-
-            return View(getClassSectionData());
-        }
-
-
-        [HttpPost]
-        public ActionResult ClassViewAndUpdate(FormCollection form)
-        {
-
-            Dictionary<int, string> sc = new Dictionary<int, string>();
-            if (Request.Form["A"] == null)
-            {
-                sc.Add(1, "off");
-            }
-            else
-            {
-                sc.Add(1, "on");
-            }
-            if (Request.Form["B"] == null)
-            {
-                sc.Add(2, "off");
-            }
-            else
-            {
-                sc.Add(2, "on");
-            }
-            if (Request.Form["C"] == null)
-            {
-                sc.Add(3, "off");
-            }
-            else
-            {
-                sc.Add(3, "on");
-            }
-            if (Request.Form["D"] == null)
-            {
-                sc.Add(4, "off");
-            }
-            else
-            {
-                sc.Add(4, "on");
-            }
-            if (Request.Form["E"] == null)
-            {
-                sc.Add(5, "off");
-            }
-            else
-            {
-                sc.Add(5, "on");
-            }
-            if (Request.Form["F"] == null)
-            {
-                sc.Add(6, "off");
-            }
-            else
-            {
-                sc.Add(6, "on");
-            }
-            ClassViewAndUpdateModel md = getClassSectionData();
-            string ClassName = Request.Form["ClassName"];
-            if (ClassName == "" || ClassName == null)
-            {
-                if (Request.IsAjaxRequest())
-                {
-                    return PartialView("_AddClassPartial", md);
-                }
-
-                return View(md);
-
-            }
-
-
-            int A = (Request.Form["A"] == null) ? 0 : 1;
-            int B = (Request.Form["B"] == null) ? 0 : 2;
-            int C = (Request.Form["C"] == null) ? 0 : 3;
-            int D = (Request.Form["D"] == null) ? 0 : 4;
-            int E = (Request.Form["E"] == null) ? 0 : 5;
-            int F = (Request.Form["F"] == null) ? 0 : 6;
-
-
-
-            var clsName = EnumUtil.ParseEnum<SClass>(ClassName);
-            var crid = User.Identity.GetUserId();
-
-
-
-            var context = new AppContext();
-
-            ViewBag.Complete = LayoutSelector();
-
-
-            ///Fro each Section There will be One Insert to ClassAndSection table
-            foreach (var item in sc)
-            {
-                var itemEnum = EnumUtil.ParseEnum<SSectionEnum>(item.Key.ToString());
-                var issExistClasSec = context.ClassAndSection.Any(c => c.SchoolProfileId == crid && c.SClass == clsName && c.SSection == itemEnum);
-
-                if (item.Value == "on")
-                {
-
-                    if (!issExistClasSec)
-                    {
-                        ClassAndSection sec = new ClassAndSection()
-                        {
-                            SchoolProfileId = crid,
-                            SClass = clsName,
-                            SSection = itemEnum
-                        };
-                        context.ClassAndSection.Add(sec);
-                        context.SaveChanges();
-
-                    }
-                    //}
-                }
-
-                if (item.Value == "off")
-                {
-                    if (issExistClasSec)
-                    {
-                        var existClasSec = context.ClassAndSection.First(c => c.SchoolProfileId == crid && c.SClass == clsName && c.SSection == itemEnum);
-                        context.ClassAndSection.Remove(existClasSec);
-                        context.SaveChanges();
-                    }
-
-                }
-            }
-            md = getClassSectionData();
-
-            if (Request.IsAjaxRequest())
-            {
-                return PartialView("_AddClassPartial", md);
-            }
-
-            return View(md);
-        }
-
-        public ActionResult SchoolList()
-        {
-            AppContext context = new AppContext();
-            var schoolList = context.Users.ToList();
-            ViewBag.PageName = "Admin Section";
-
-            return View(schoolList);
-        }
-
-
-        /// <summary>
-        /// Tis is for Getting View Model of Class And Section form
-        /// </summary>
-        /// <returns></returns>
-        internal ClassViewAndUpdateModel getClassSectionData()
-        {
-            var crUser = User.Identity.GetUserId();
-            var context = new AppContext();
-            var clsSes = context.ClassAndSection.Where(c => c.SchoolProfileId == crUser).ToList();
-
-            ///Get All Distinct Class of School
-            var listClass = clsSes.Select(m => m.SClass).Distinct().ToList();
-
-
-            if(listClass.Count > 3 && listClass.Count < 5)
-            {
-                var sp = context.SchoolProfile.First(p => p.UserId == crUser);
-                sp.IsComplete = true;
-                context.SaveChanges();
-            }
-
-            //Creating object of ViewModel
-            ClassViewAndUpdateModel vm = new ClassViewAndUpdateModel();
-
-            List<SClassVM> cVMList = new List<SClassVM>();
-            List<SSectionVM> sList = new List<SSectionVM>();
-            ///Iterating through all Class
-            foreach (var scls in listClass)
-            {
-                SClassVM cVM = new SClassVM();
-                //Find List of distinct Section list
-                List<SSectionVM> result = (from p in context.ClassAndSection
-                                           where p.SClass == scls && p.SchoolProfileId == crUser
-                                           select new SSectionVM()
-                                           {
-                                               Name = p.SSection,
-                                           }).Distinct().ToList();
-
-                //Adding Class Name
-                cVM.Name = scls;
-                //Adding Section list to that class
-                cVM.ListOfSection = result;
-
-                ///The whole class object
-                ///Adding to ViewModel
-                ///So that we can iterate
-                ///
-                cVMList.Add(cVM);
-            }
-            cVMList = cVMList.OrderBy(l => l.Name).ToList();
-            vm.SClassList = cVMList;
-
-            return vm;
-        }
-
         //
         // GET: /Account/Login
         [AllowAnonymous]
@@ -434,29 +76,11 @@ namespace SM.WEB.Controllers
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(
-                model.Email,
-                model.Password,
-                model.RememberMe,
-                shouldLockout: false);
+            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
-                    {
-                        var currentUser = User.Identity.GetUserName();
-                        var context = new AppContext();
-                        var user = context.SchoolProfile.First(m => m.UserName == currentUser);
-                        //bool isComplete = user.IsComplete;
-                        if (user.IsComplete)
-                        {
-                            returnUrl = "SchoolProfileUpdate";
-                        }
-                        else
-                        {
-                            returnUrl = "SchoolProfileUpdate";
-                        }
-                    }
-                    return RedirectToAction(returnUrl, "Account");
+                    return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -497,7 +121,7 @@ namespace SM.WEB.Controllers
             // If a user enters incorrect codes for a specified amount of time then the user account
             // will be locked out for a specified amount of time.
             // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -526,53 +150,13 @@ namespace SM.WEB.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
-
-
-
             if (ModelState.IsValid)
             {
-
-
-                var user = new ApplicationUser
-                {
-                    UserName = model.Email,
-                    Email = model.Email
-                };
-
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
-
-                ///Insert into SchoolProfile
-                ///
-                var context = new AppContext();
-
-                SchoolProfile sp = new SchoolProfile()
-                {
-                    UserId = user.Id,
-                    UserName = model.Email,
-                    Password = PasswordHash.HashPassword(model.Password),
-                    Email = model.Email,
-                    CPName = model.CPName,
-                    CPPhone = model.CPPhone,
-                    Name = model.Name,
-                    Board = model.Board,
-                    TotalStudent = model.TotalStudent,
-                    RegistarDate = DateTime.Now,
-                    SAddress = new SAddress
-                    {
-                        AddL1 = "Change it",
-                        City = model.City,
-                        Pin = 000000,
-                        state = State.ChangeIt,
-                        SchoolProfileId = user.Id
-
-                    },
-                };
-                context.SchoolProfile.Add(sp);
-                context.SaveChanges();
-
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
@@ -580,13 +164,13 @@ namespace SM.WEB.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("SchoolProfileUpdate", "Account");
+                    return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
             }
 
             // If we got this far, something failed, redisplay form
-            return View("Login", model);
+            return View(model);
         }
 
         //

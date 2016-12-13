@@ -98,6 +98,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EN\DB\AppContext.cs" />
+    <Compile Include="EN\DB\IdentityModels.cs" />
     <Compile Include="EN\Fee\FeeAccount.cs" />
     <Compile Include="EN\School\ClassAndSection.cs" />
     <Compile Include="EN\School\SchoolProfile.cs" />
@@ -105,6 +107,15 @@
     <Compile Include="EN\Student\StudentReg.cs" />
     <Compile Include="EN\Tenure\TenureHoliday.cs" />
     <Compile Include="EN\Tenure\TenureTime.cs" />
+    <Compile Include="Migrations\201612131504137_InitialAfterChangeDBContext.cs" />
+    <Compile Include="Migrations\201612131504137_InitialAfterChangeDBContext.Designer.cs">
+      <DependentUpon>201612131504137_InitialAfterChangeDBContext.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612131510104_AddStudentModel.cs" />
+    <Compile Include="Migrations\201612131510104_AddStudentModel.Designer.cs">
+      <DependentUpon>201612131510104_AddStudentModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="VM\Account\ClassViewAndUpdateModel.cs" />
     <Compile Include="VM\Account\Enums\City.cs" />
     <Compile Include="EN\School\SAddress.cs" />
@@ -152,6 +163,14 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="EN\Account\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201612131504137_InitialAfterChangeDBContext.resx">
+      <DependentUpon>201612131504137_InitialAfterChangeDBContext.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612131510104_AddStudentModel.resx">
+      <DependentUpon>201612131510104_AddStudentModel.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

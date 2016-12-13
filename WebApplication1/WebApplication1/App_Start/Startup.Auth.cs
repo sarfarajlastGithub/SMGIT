@@ -5,10 +5,10 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
-using SM.WEB.Models;
-using SM.LIB.EN.DB;
+using WebApplication1.Models;
+using ClassLibrary1;
 
-namespace SM.WEB
+namespace WebApplication1
 {
     public partial class Startup
     {
