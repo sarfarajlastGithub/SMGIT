@@ -37,7 +37,7 @@
                             </span>
                         </div>
                         <div class="panel-body">
-                            @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                            @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { role = "form" }))
                             {
                                 @Html.AntiForgeryToken()
                                 <span class="splash-title xs-pb-20">Sign Up</span>

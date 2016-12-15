@@ -1,6 +1,6 @@
 ﻿@model SM.LIB.VM.Account.ClassViewAndUpdateModel
 
-<div id="clasajaxLoad" class="col-sm-5">
+
     <div class="panel panel-default panel-table">
         <div style="background-color:dodgerblue">
             <div class="panel-heading bigFont">
@@ -13,6 +13,7 @@
                 {
                     foreach (var sclass in Model.SClassList)
                     {
+                        <hr />
                         <div class="col-sm-4">
                             <label class="control-label">@sclass.Name</label>
                         </div>
@@ -39,4 +40,3 @@
             </div>
         </div>
     </div>
-</div>

@@ -18,5 +18,7 @@ namespace SM.LIB.EN.School
         public SClass SClass { get; set; }
 
         public SSectionEnum SSection { get; set; }
+
+        public int NoOfStudentEachSection { get; set; }
     }
 }

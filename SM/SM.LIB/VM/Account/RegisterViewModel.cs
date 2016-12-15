@@ -23,7 +23,7 @@ namespace SM.LIB.VM.Account
 
         [Required]
         [Display(Name ="No. of Student")]
-        public int TotalStudent { get; set; }
+        public string TotalStudent { get; set; }
 
         [Required]
         [EmailAddress]
@@ -48,6 +48,7 @@ namespace SM.LIB.VM.Account
 
         [Required]
         [Display(Name = "Contact Person Mobile Number")]
+        [RegularExpression(@"^([0-9]{10})$", ErrorMessage = "Invalid Mobile Number.")]
         public string CPPhone { get; set; }
 
     }

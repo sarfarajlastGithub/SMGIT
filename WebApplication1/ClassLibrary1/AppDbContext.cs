@@ -9,6 +9,6 @@ namespace ClassLibrary1
 {
     public class AppDbContext : ApplicationDbContext
     {
-        DbSet<scClass> ScClass { get; set; }
+        public DbSet<scClass> ScClass { get; set; }
     }
 }

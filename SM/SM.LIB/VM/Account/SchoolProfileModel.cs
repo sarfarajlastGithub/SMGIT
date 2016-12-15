@@ -24,10 +24,12 @@ namespace SM.LIB.VM.Account
         public SchoolGType SchoolGType { get; set; }
 
         [Required]
-        public int TotalStudents { get; set; }
+        [StringLength(6,ErrorMessage ="Digit has to be less then 7")]
+        public string TotalStudents { get; set; }
 
         [Display(Name = "School Phone Number")]
-        public int SchoolPhoneNumber { get; set; }
+        [RegularExpression(@"^([0-9]{10})$", ErrorMessage = "Invalid Mobile Number.")]
+        public string SchoolPhoneNumber { get; set; }
 
         [Required]
         [Display(Name = "Email Id")]
@@ -39,6 +41,7 @@ namespace SM.LIB.VM.Account
 
         [Required]
         [Display(Name = "Contact Person Mobile")]
+        [RegularExpression(@"^([0-9]{10})$", ErrorMessage = "Invalid Mobile Number.")]
         public string CPPhone { get; set; }
 
         [Required]

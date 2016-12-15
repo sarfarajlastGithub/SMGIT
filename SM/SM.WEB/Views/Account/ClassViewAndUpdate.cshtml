@@ -11,6 +11,8 @@
     }
 
 }
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
 
 @section newStyle{
     <link rel="stylesheet" type="text/css" href="~/assets/lib/datetimepicker/css/bootstrap-datetimepicker.min.css" />
@@ -21,7 +23,7 @@
         }
     </style>*@
 
-    <div class="row">
+<div class="row">
     <h2 class="page-head-title">School Profile</h2>
 
     <div class="col-sm-7">
@@ -38,7 +40,9 @@
                     {
                         HttpMethod = "post",
                         InsertionMode = InsertionMode.Replace,
-                        UpdateTargetId = "clasajaxLoad"
+                        UpdateTargetId = "clasajaxLoad",
+                        LoadingElementId = "divLoading",
+                        Confirm = "Confirm"
                     }))
                     {
                         <div class="form-group">
@@ -90,7 +94,10 @@
                             <div class="col-sm-2">
                                 <br />
                                 <br />
-                                <button type="submit" @*style="margin-left:25%"*@ class="btn btn-primary btn-space btn-xl" >Add</button>
+                                <button type="submit" @*style="margin-left:25%"*@ class="btn btn-primary btn-space btn-xl">Add</button>
+                                <div id="divLoading" style="color:forestgreen;width:200px;font-size:larger;display:none;position:absolute;">
+                                    <img src="~/assets/img/ajax-loader.gif" />Adding ....
+                                </div>
                             </div>
                         </div>
 
@@ -99,9 +106,13 @@
             </div>
         </div>
     </div>
-
+    <div id="clasajaxLoad" class="col-sm-5">
 
         @Html.Partial("_AddClassPartial", Model);
+
+    </div>
+
+
 
 </div>
 

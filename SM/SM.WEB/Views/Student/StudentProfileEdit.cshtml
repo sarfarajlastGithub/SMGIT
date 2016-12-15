@@ -1,0 +1,338 @@
+﻿@model SM.LIB.VM.Student.StudentVM
+@{
+
+}
+@section newStyle{
+    <link rel="stylesheet" type="text/css" href="~/assets/lib/datetimepicker/css/bootstrap-datetimepicker.min.css" />
+}
+
+<div class="row wizard-row">
+    <div class="col-md-12 fuelux">
+        <div class="block-wizard panel panel-default">
+            <div id="wizard1" class="wizard wizard-ux">
+                <ul class="steps">
+                    <li data-step="1" class="active">Basic<span class="chevron"></span></li>
+                    <li data-step="2">Guardian<span class="chevron"></span></li>
+                    <li data-step="3">Address<span class="chevron"></span></li>
+                    <li data-step="4">Academic<span class="chevron"></span></li>
+                </ul>
+                <div class="actions">
+                    <button type="button" class="btn btn-xs btn-prev btn-default"><i class="icon mdi mdi-chevron-left"></i>Prev</button>
+                    <button type="button" data-last="Finish" class="btn btn-xs btn-next btn-default">Next<i class="icon mdi mdi-chevron-right"></i></button>
+                </div>
+                @using (Html.BeginForm("StudentProfileEdit", "Student", FormMethod.Post, new { enctype = "multipart/form-data", role = "form" }))
+                {
+                    <div class="step-content">
+                        <div data-step="1" class="step-pane active">
+                            <div data-parsley-namespace="data-parsley-" data-parsley-validate="" novalidate="" class="form-horizontal group-border-dashed">
+                                <div class="form-group no-padding">
+                                    <div class="col-sm-7">
+                                        <h3 class="wizard-title">Basic Info</h3>
+                                    </div>
+                                </div>
+                                <div>
+                                    @Html.HiddenFor(m => m.SchoolId)
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Name, new { @class = "col-sm-3 control-label" })
+                                    <div class="col-sm-6">
+                                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = "Student Name" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label xs-pt-20">Icon Radio</label>
+                                    <div class="col-sm-6">
+                                        <div class="be-radio-icon inline">
+                                            @*@Html.RadioButtonFor(m => m.Gender, "2", new { @Id="rad1", name="rad1" })*@
+                                            <input type="radio" checked="" name="Gender" id="rad1" value="2">
+                                            <label for="rad1"><span class="mdi mdi-female"></span></label>
+                                        </div>
+                                        <div class="be-radio-icon inline">
+                                            @*@Html.RadioButtonFor(m => m.Gender, "1", new { @Id = "rad2", name = "rad1" })*@
+                                            <input type="radio" name="Gender" id="rad2" value="1">
+                                            <label for="rad2"><span class="mdi mdi-male-alt"></span></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group display-none">
+                                    @Html.LabelFor(m => m.Gender, new { @class = "col-sm-3 control-label" })
+                                    <div class="col-sm-6">
+                                        @Html.EnumDropDownListFor(m => m.Gender, "Select Type", new { @class = "form-control" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.DateOfBirth, new { @class = "col-sm-3 control-label" })
+                                    <div class="col-md-3 col-xs-7">
+                                        <div data-min-view="2" data-date-format="dd-mm, yyyy" class="input-group date datetimepicker">
+                                            @Html.TextBoxFor(m => m.DateOfBirth, new { @class = "form-control", size = "16", placeholder = "Date of Birth", @readonly = "readonly" })
+                                            <span class="input-group-addon btn btn-primary"><i class="icon-th mdi mdi-calendar"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.PreEduInfo, new { @class = "col-sm-3 control-label" })
+                                    <div class="col-sm-6">
+                                        @Html.TextAreaFor(m => m.PreEduInfo, new { @class = "form-control", placeholder = "Previous Education Details" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.PhotoLocation, new { @class = "col-sm-3 control-label" })
+                                    <div class="col-sm-6">
+                                        <input type="file" name="file" id="file" class="form-control" placeholder="Select Photo" />
+
+                                    </div>
+                                </div>
+                                <div id="lodingFile" class="display-none">
+                                    <div class="col-sm-offset-4 col-sm-10">
+                                        <img src="~/assets/img/ajax-loader.gif" />
+                                    </div>
+                                </div>
+                                <div id="profileImgId" class="display-none form-group">
+                                    <div class="col-sm-offset-4 col-sm-10">
+                                        <img id="proimg" height="100" width="150" src="~/Uploads/StudentsProfileImg/interior-wall-bedroom-blue-royaleplayplus70.jpg.image.1140.610.medium.jpg" />
+                                    </div>
+                                </div>
+
+                                <div class="display-none">
+                                    @Html.TextBoxFor(m => m.PhotoLocation, new { @class = "form-control display-none" })
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <button class="btn btn-default btn-space">Cancel</button>
+                                        <button data-wizard="#wizard1" class="btn btn-primary btn-space wizard-next">Next Step</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div data-step="2" class="step-pane active">
+                            <div data-parsley-namespace="data-parsley-" data-parsley-validate="" novalidate="" class="form-horizontal group-border-dashed">
+                                <div class="form-group no-padding">
+                                    <div class="col-sm-7">
+                                        <h3 class="wizard-title">Guardian Info</h3>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.GuardianName, new { @class = "col-sm-3 control-label" })
+                                    <div class="col-sm-6">
+                                        @Html.TextBoxFor(m => m.GuardianName, new { @class = "form-control", placeholder = "Guardian Name" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.GuardianMobile, new { @class = "col-sm-3 control-label" })
+                                    <div class="col-sm-6">
+                                        @Html.TextBoxFor(m => m.GuardianMobile, new { @class = "form-control", placeholder = "Mobile Number" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.GuardialEmail, new { @class = "col-sm-3 control-label" })
+                                    <div class="col-sm-6">
+                                        @Html.TextBoxFor(m => m.GuardialEmail, new { @class = "form-control", placeholder = "somting@som.com" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.GuardianQualification, new { @class = "col-sm-3 control-label" })
+                                    <div class="col-sm-6">
+                                        @Html.EnumDropDownListFor(m => m.GuardianQualification, "Select Qualification", new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.GuardianOcupation, new { @class = "col-sm-3 control-label" })
+                                    <div class="col-sm-6">
+                                        @Html.TextBoxFor(m => m.GuardianOcupation, new { @class = "form-control", placeholder = "Ocupation" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.RelationWithGuardian, new { @class = "col-sm-3 control-label" })
+                                    <div class="col-sm-6">
+                                        @Html.EnumDropDownListFor(m => m.RelationWithGuardian, "Choose relation", new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <button class="btn btn-default btn-space">Cancel</button>
+                                        <button data-wizard="#wizard1" class="btn btn-primary btn-space wizard-next">Next Step</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div data-step="3" class="step-pane active">
+                            <div data-parsley-namespace="data-parsley-" data-parsley-validate="" novalidate="" class="form-horizontal group-border-dashed">
+                                <div class="form-group no-padding">
+                                    <div class="col-sm-7">
+                                        <h3 class="wizard-title">Address</h3>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Address.AddL1, new { @class = "col-sm-3 control-label" })
+                                    <div class="col-sm-6">
+                                        @Html.TextBoxFor(m => m.Address.AddL1, new { @class = "form-control", placeholder = "Address In details" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Address.AddL2, new { @class = "col-sm-3 control-label" })
+                                    <div class="col-sm-6">
+                                        @Html.TextBoxFor(m => m.Address.AddL2, new { @class = "form-control", placeholder = "Address In details" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Address.Pin, new { @class = "col-sm-3 control-label" })
+                                    <div class="col-sm-6">
+                                        @Html.TextBoxFor(m => m.Address.Pin, new { @class = "form-control", placeholder = "6 Digit Number" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Address.City, new { @class = "col-sm-3 control-label" })
+                                    <div class="col-sm-6">
+                                        @Html.EnumDropDownListFor(m => m.Address.City, "Select City", new { @class = "form-control", placeholder = "City Name" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Address.state, new { @class = "col-sm-3 control-label" })
+                                    <div class="col-sm-6">
+                                        @Html.EnumDropDownListFor(m => m.Address.state, "Select State", new { @class = "form-control", placeholder = "State Name" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <button class="btn btn-default btn-space">Cancel</button>
+                                        <button data-wizard="#wizard1" class="btn btn-primary btn-space wizard-next">Next Step</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div data-step="4" class="step-pane active">
+                            <div data-parsley-namespace="data-parsley-" data-parsley-validate="" novalidate="" class="form-horizontal group-border-dashed">
+                                <div class="form-group no-padding">
+                                    <div class="col-sm-7">
+                                        <h3 class="wizard-title">Academic Info</h3>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.TenureYear, new { @class = "col-sm-3 control-label" })
+                                    <div class="col-sm-6">
+                                        @Html.EnumDropDownListFor(m => m.TenureYear, "Choose Session Year", new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Stuclass, new { @class = "col-sm-3 control-label" })
+                                    <div class="col-sm-6">
+                                        @Html.EnumDropDownListFor(m => m.Stuclass, "Select Class", new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.StuSection, new { @class = "col-sm-3 control-label" })
+                                    <div class="col-sm-6">
+                                        @Html.EnumDropDownListFor(m => m.StuSection, "Select Section", new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Is Active</label>
+                                    <div class="col-sm-6 xs-pt-5">
+                                        <div class="switch-button switch-button-yesno ckck">
+                                            <input type="checkbox" checked="" name="IsAct" id="IsAct" value="1"><span>
+                                                <label class="ckck" for="IsAct"></label>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group display-none">
+                                    @Html.LabelFor(m => m.IsActive, new { @class = "col-sm-3 control-label" })
+                                    <div class="col-md-3 col-xs-7">
+                                        @Html.CheckBoxFor(m => m.IsActive, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div id="admitDate" class="form-group">
+                                    @Html.LabelFor(m => m.AdmissioinDate, new { @class = "col-sm-3 control-label" })
+                                    <div class="col-md-3 col-xs-7">
+                                        <div data-min-view="2" data-date-format="dd-mm, yyyy" data-link-field="dtp_input1" class="input-group date datetimepicker">
+                                            @Html.TextBoxFor(m => m.AdmissioinDate, new { @class = "form-control", size = "16", placeholder = "Date", @readonly = "readonly" })
+                                            <span class="input-group-addon btn btn-primary"><i class="icon-th mdi mdi-calendar"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <input type="submit" id="submitbtn" style="margin-left:25%" data-wizard="#wizard1" class="btn btn-success btn-xl" value="Complete">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/assets/js/uploadPic.js"></script>
+<script type="text/javascript">
+
+    $("#submitbtn").click(function () {
+        //var vl = $("input:radio[name=Gender]:checked").val();
+        //alert("This is radio button value: -" + vl);
+
+        //alert($("input:checkbox:checked").val());
+        alert($("#IsAct:checked").val());
+        if ($("#IsAct:checked").val() == 1) {
+
+            $("#IsActive").prop('checked', true);
+        }
+        else {
+            $("#IsActive").prop('checked', false);
+        }
+
+    });
+
+
+    //$("input[type=checkbox]:checked").checked(function () {
+    //    alert("hiii you checked");
+    //});
+    //$("input[type=checkbox]:checked").change(function () {
+    //    alert("hiii you changed");
+    //});
+    //$(".ckck").checked(function () {
+    //    alert("hiii you checked");
+    //});
+    //$(".ckck").change(function () {
+    //    alert("hiii you changed");
+    //});
+    //$("#rad1").change(function () {
+    //    var value = $("#rad1:checked").val();
+    //    alart("Rad1 value is:-" + value);
+    //    $("#Gender").val(value);
+    //    alart("Gender value is:-"+$("#Gender").val());
+    //});
+    //$("#rad2").change(function () {
+    //    var value = $("#rad2:checked").val();
+    //    alart("Rad2 value is:-" + value);
+    //    $("#Gender").val(value);
+    //});
+    //$("#IsAct").change(function () {
+
+    //    if ($(this).checked) {
+    //        $("#admitDate").hide();
+    //    }
+    //    else
+    //    {
+    //        $("#admitDate").show();
+    //    }
+
+    //    var value = $("#IsAct:checked").val();
+    //    $("#IsActive").val(value);
+
+
+    //    });
+
+
+
+    //});
+</script>
+@section scripts{
+    <script src="~/assets/lib/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
+    <script src="~/assets/lib/jquery.nestable/jquery.nestable.js" type="text/javascript"></script>
+    <script src="~/assets/lib/moment.js/min/moment.min.js" type="text/javascript"></script>
+    <script src="~/assets/lib/datetimepicker/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+
+}

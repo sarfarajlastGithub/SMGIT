@@ -181,11 +181,13 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\BL\AccountBL.cs" />
     <Compile Include="Models\BL\CommentedClass.cs" />
+    <Compile Include="Models\BL\SUsers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -193,6 +195,7 @@
     <Content Include="assets\css\style.css" />
     <Content Include="assets\img\140x140.png" />
     <Content Include="assets\img\404-bg.png" />
+    <Content Include="assets\img\ajax-loader.gif" />
     <Content Include="assets\img\avatar-150.png" />
     <Content Include="assets\img\avatar.png" />
     <Content Include="assets\img\avatar1.png" />
@@ -227,6 +230,7 @@
     <Content Include="assets\img\slack.png" />
     <Content Include="assets\img\user-profile-display.png" />
     <Content Include="assets\js\main.js" />
+    <Content Include="assets\js\uploadPic.js" />
     <Content Include="assets\lib\bootstrap-markdown\js\bootstrap-markdown.js" />
     <Content Include="assets\lib\bootstrap-slider\css\bootstrap-slider.css" />
     <Content Include="assets\lib\bootstrap-slider\js\bootstrap-slider.js" />
@@ -396,6 +400,8 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -404,6 +410,12 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Uploads\StudentsProfileImg\118interior-wall-foyer-pink-royaleplayplus.jpg.image.1140.610.medium.jpg" />
+    <Content Include="Uploads\StudentsProfileImg\213interior-wall-dining%2520room-purple-wall%2520fashions.jpg.image.1140.610.medium.jpg" />
+    <Content Include="Uploads\StudentsProfileImg\243interior-wall-kid%27s%2520room-pink-wall%2520fashions.jpg.image.1140.610.medium.jpg" />
+    <Content Include="Uploads\StudentsProfileImg\244interior-wall-kid%27s%2520room-yellow-wall%2520fashions.jpg.image.1140.610.medium.jpg" />
+    <Content Include="Uploads\StudentsProfileImg\exterior-wall-exterior-brown-apexultima136.jpg.image.1140.610.medium.jpg" />
+    <Content Include="Uploads\StudentsProfileImg\interior-wall-bedroom-blue-royaleplayplus70.jpg.image.1140.610.medium.jpg" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -447,9 +459,12 @@
     <Content Include="Views\Account\SchoolProfileEdit.cshtml" />
     <Content Include="Views\Shared\_AddClassPartial.cshtml" />
     <Content Include="Views\Account\ClassViewAndUpdate.cshtml" />
+    <Content Include="Views\Student\StudentProfileEdit.cshtml" />
+    <Content Include="Views\Student\StudentSearch.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Uploads\SchoolsProfileImg\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

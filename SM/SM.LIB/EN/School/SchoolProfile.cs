@@ -21,14 +21,14 @@ namespace SM.LIB.EN.School
         public string CPName { get; set; }
         public string CPPhone { get; set; }
         public SBoard Board { get; set; }
-        public int TotalStudent { get; set; }
+        public string TotalStudent { get; set; }
         public SchoolFType SchoolFType { get; set; }
         public SchoolGType SchoolGType { get; set; }
         public SClass SClass { get; set; }
         public DateTime RegistarDate { get; set; }
         public bool IsComplete { get; set; }
         public DateTime? LastUpdatedDate { get; set; }
-        public int SchoolPhoneNumber { get; set; }
+        public string SchoolPhoneNumber { get; set; }
         public DateTime? AnnulDateOfExam { get; set; }
         public Medium Medium { get; set; }
         public DateTime? EstablishedDate { get; set; }

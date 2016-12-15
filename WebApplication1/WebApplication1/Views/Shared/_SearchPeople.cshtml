@@ -1,0 +1,18 @@
+﻿
+@using ClassLibrary1
+@model IEnumerable<scClass>
+
+@if (Model != null)
+{
+    foreach (scClass p in Model)
+    {
+        <tr>
+            <td>@p.ScId</td>
+            <td>@p.FirstName</td>
+            <td>@p.LastName</td>
+            <td>@p.Age</td>
+            <td>@p.Active</td>
+        </tr>
+    }
+}
+

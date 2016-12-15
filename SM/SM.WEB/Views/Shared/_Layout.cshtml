@@ -230,22 +230,22 @@
                                         </ul>
                                     </li>
                                     <li class="parent">
-                                        <a href="#"><i class="icon mdi mdi-layers"></i><span>Pages</span></a>
+                                        <a href="#"><i class="icon mdi mdi-layers"></i><span>Administrative</span></a>
                                         <ul class="sub-menu">
                                             <li class="active">
-                                                <a href="pages-blank.html">Blank Page</a>
+                                                @Html.ActionLink("View Profile", "SchoolProfileView", "Account")
                                             </li>
                                             <li>
-                                                <a href="pages-blank-header.html">Blank Page Header</a>
+                                                @Html.ActionLink("Update Profile", "SchoolProfileUpdate", "Account")
                                             </li>
                                             <li>
-                                                <a href="pages-login.html">Login</a>
+                                                @Html.ActionLink("Class Manage", "ClassViewAndUpdate", "Account")
                                             </li>
                                             <li>
-                                                <a href="pages-login2.html">Login v2</a>
+                                                @Html.ActionLink("Add Student", "StudentProfileEdit", "Student")
                                             </li>
                                             <li>
-                                                <a href="pages-404.html">404 Page</a>
+                                                @Html.ActionLink("Search Students", "StudentSearch", "Student")
                                             </li>
                                             <li>
                                                 <a href="pages-sign-up.html">Sign Up</a>

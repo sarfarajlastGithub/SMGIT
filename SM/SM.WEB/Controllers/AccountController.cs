@@ -1,21 +1,18 @@
 ﻿using System;
-using System.Globalization;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using SM.WEB.Models;
 using SM.LIB.VM.Account;
 using SM.LIB.EN.School;
 using SM.LIB.VM.Account.Enums;
 using SM.LIB.VM;
-using System.Security.Cryptography;
 using System.Collections.Generic;
 using SM.LIB.EN.DB;
+using System.Threading;
 
 namespace SM.WEB.Controllers
 {
@@ -58,6 +55,8 @@ namespace SM.WEB.Controllers
                 _userManager = value;
             }
         }
+
+
 
         public ActionResult SchoolProfileUpdate()
         {
@@ -338,6 +337,8 @@ namespace SM.WEB.Controllers
             }
             md = getClassSectionData();
 
+            Thread.Sleep(2000);
+
             if (Request.IsAjaxRequest())
             {
                 return PartialView("_AddClassPartial", md);
@@ -432,40 +433,52 @@ namespace SM.WEB.Controllers
                 return View(model);
             }
 
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(
+            try
+            {
+                // This doesn't count login failures towards account lockout
+                // To enable password failures to trigger account lockout, change to shouldLockout: true
+                var result = await SignInManager.PasswordSignInAsync(
                 model.Email,
                 model.Password,
                 model.RememberMe,
                 shouldLockout: false);
-            switch (result)
-            {
-                case SignInStatus.Success:
-                    {
-                        var currentUser = User.Identity.GetUserName();
-                        var context = new AppContext();
-                        var user = context.SchoolProfile.First(m => m.UserName == currentUser);
-                        //bool isComplete = user.IsComplete;
-                        if (user.IsComplete)
+
+                switch (result)
+                {
+                    case SignInStatus.Success:
                         {
-                            returnUrl = "SchoolProfileUpdate";
+                            var currentUser = User.Identity.GetUserName();
+                            var context = new AppContext();
+                            var user = context.SchoolProfile.First(m => m.UserName == currentUser);
+                            //bool isComplete = user.IsComplete;
+                            if (user.IsComplete)
+                            {
+                                returnUrl = "SchoolProfileUpdate";
+                            }
+                            else
+                            {
+                                returnUrl = "SchoolProfileUpdate";
+                            }
                         }
-                        else
-                        {
-                            returnUrl = "SchoolProfileUpdate";
-                        }
-                    }
-                    return RedirectToAction(returnUrl, "Account");
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-                case SignInStatus.Failure:
-                default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
-                    return View(model);
+                        return RedirectToAction(returnUrl, "Account");
+                    case SignInStatus.LockedOut:
+                        return View("Lockout");
+                    case SignInStatus.RequiresVerification:
+                        return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+                    case SignInStatus.Failure:
+                    default:
+                        ModelState.AddModelError("", "Invalid login attempt.");
+                        return View(model);
+                }
             }
+            catch (Exception)
+            {
+                ModelState.AddModelError("", "Database haven't started please try again");
+                return RedirectToAction("Login");
+            }
+
+
+
         }
 
         //

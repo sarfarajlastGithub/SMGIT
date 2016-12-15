@@ -1,6 +1,7 @@
 ﻿using SM.LIB.EN.Fee;
 using SM.LIB.EN.School;
 using SM.LIB.EN.Tenure;
+using SM.LIB.VM.Account.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -17,29 +18,28 @@ namespace SM.LIB.EN.Student
         public SchoolProfile SchoolProfile { get; set; }
 
         [Required]
-        public int SchoolProfileId { get; set; }
+        public string SchoolProfileId { get; set; }
 
         public StudentProfile StudentProfile { get; set; }
 
         [Required]
-        public int StudentProfileId { get; set; }
+        public string StudentId { get; set; }
 
         public string StudentName { get; set; }
 
-        public ClassAndSection SClass { get; set; }
+        public SClass StuClass { get; set; }
 
-        [Required]
-        public int ClassAndSectionId { get; set; }
+        public SSectionEnum StuSection { get; set; }
 
-        public TenureTime TenureTime { get; set; }
+        public TenureYear TenureYear { get; set; }
 
-        public int TenureTimeId { get; set; }
+        //public FeeAccount FeeAccount { get; set; }
 
-        public FeeAccount FeeAccount { get; set; }
-
-        public int FeeAccountId { get; set; }
+        //public int FeeAccountId { get; set; }
 
         public bool IsActive { get; set; }
+
+        public DateTime? AdmissioinDate { get; set; }
 
     }
 }

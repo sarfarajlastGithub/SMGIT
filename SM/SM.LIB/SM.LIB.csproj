@@ -98,11 +98,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BL\AccountBL.cs" />
+    <Compile Include="BL\CommentedClass.cs" />
     <Compile Include="EN\DB\AppContext.cs" />
     <Compile Include="EN\DB\IdentityModels.cs" />
     <Compile Include="EN\Fee\FeeAccount.cs" />
     <Compile Include="EN\School\ClassAndSection.cs" />
     <Compile Include="EN\School\SchoolProfile.cs" />
+    <Compile Include="EN\Student\Address.cs" />
     <Compile Include="EN\Student\StudentProfile.cs" />
     <Compile Include="EN\Student\StudentReg.cs" />
     <Compile Include="EN\Tenure\TenureHoliday.cs" />
@@ -114,6 +117,34 @@
     <Compile Include="Migrations\201612131510104_AddStudentModel.cs" />
     <Compile Include="Migrations\201612131510104_AddStudentModel.Designer.cs">
       <DependentUpon>201612131510104_AddStudentModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612131532105_chgeIntToString.cs" />
+    <Compile Include="Migrations\201612131532105_chgeIntToString.Designer.cs">
+      <DependentUpon>201612131532105_chgeIntToString.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612131536183_chgeIntToString1.cs" />
+    <Compile Include="Migrations\201612131536183_chgeIntToString1.Designer.cs">
+      <DependentUpon>201612131536183_chgeIntToString1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612141633421_FewChangesAddedInStudentTbl.cs" />
+    <Compile Include="Migrations\201612141633421_FewChangesAddedInStudentTbl.Designer.cs">
+      <DependentUpon>201612141633421_FewChangesAddedInStudentTbl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612141712084_ChangeAddressTblFroStudent.cs" />
+    <Compile Include="Migrations\201612141712084_ChangeAddressTblFroStudent.Designer.cs">
+      <DependentUpon>201612141712084_ChangeAddressTblFroStudent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612141846233_FewAttributeTypChanges.cs" />
+    <Compile Include="Migrations\201612141846233_FewAttributeTypChanges.Designer.cs">
+      <DependentUpon>201612141846233_FewAttributeTypChanges.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612141958191_guardianMobileAttChangeType.cs" />
+    <Compile Include="Migrations\201612141958191_guardianMobileAttChangeType.Designer.cs">
+      <DependentUpon>201612141958191_guardianMobileAttChangeType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612142215469_hideFeeAcound.cs" />
+    <Compile Include="Migrations\201612142215469_hideFeeAcound.Designer.cs">
+      <DependentUpon>201612142215469_hideFeeAcound.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="VM\Account\ClassViewAndUpdateModel.cs" />
@@ -156,6 +187,7 @@
     <Compile Include="VM\Student\Enum\Gender.cs" />
     <Compile Include="VM\Student\Enum\Qualification.cs" />
     <Compile Include="VM\Student\Enum\Relation.cs" />
+    <Compile Include="VM\Student\StudentVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -170,6 +202,27 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612131510104_AddStudentModel.resx">
       <DependentUpon>201612131510104_AddStudentModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612131532105_chgeIntToString.resx">
+      <DependentUpon>201612131532105_chgeIntToString.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612131536183_chgeIntToString1.resx">
+      <DependentUpon>201612131536183_chgeIntToString1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612141633421_FewChangesAddedInStudentTbl.resx">
+      <DependentUpon>201612141633421_FewChangesAddedInStudentTbl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612141712084_ChangeAddressTblFroStudent.resx">
+      <DependentUpon>201612141712084_ChangeAddressTblFroStudent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612141846233_FewAttributeTypChanges.resx">
+      <DependentUpon>201612141846233_FewAttributeTypChanges.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612141958191_guardianMobileAttChangeType.resx">
+      <DependentUpon>201612141958191_guardianMobileAttChangeType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612142215469_hideFeeAcound.resx">
+      <DependentUpon>201612142215469_hideFeeAcound.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

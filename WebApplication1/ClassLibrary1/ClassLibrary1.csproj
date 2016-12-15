@@ -63,6 +63,10 @@
     <Compile Include="Migrations\201612131137244_Initial.Designer.cs">
       <DependentUpon>201612131137244_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612132250080_adnewattribute.cs" />
+    <Compile Include="Migrations\201612132250080_adnewattribute.Designer.cs">
+      <DependentUpon>201612132250080_adnewattribute.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="scClass.cs" />
@@ -74,6 +78,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201612131137244_Initial.resx">
       <DependentUpon>201612131137244_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612132250080_adnewattribute.resx">
+      <DependentUpon>201612132250080_adnewattribute.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
