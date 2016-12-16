@@ -23,7 +23,7 @@ namespace SM.LIB.EN.Student
         public StudentProfile StudentProfile { get; set; }
 
         [Required]
-        public string StudentId { get; set; }
+        public string StudentProfileId { get; set; }
 
         public string StudentName { get; set; }
 

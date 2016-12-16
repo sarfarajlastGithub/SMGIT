@@ -146,6 +146,14 @@
     <Compile Include="Migrations\201612142215469_hideFeeAcound.Designer.cs">
       <DependentUpon>201612142215469_hideFeeAcound.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612152316473_StudentRegChange.cs" />
+    <Compile Include="Migrations\201612152316473_StudentRegChange.Designer.cs">
+      <DependentUpon>201612152316473_StudentRegChange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612152321211_StudentRegChange1.cs" />
+    <Compile Include="Migrations\201612152321211_StudentRegChange1.Designer.cs">
+      <DependentUpon>201612152321211_StudentRegChange1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="VM\Account\ClassViewAndUpdateModel.cs" />
     <Compile Include="VM\Account\Enums\City.cs" />
@@ -187,6 +195,7 @@
     <Compile Include="VM\Student\Enum\Gender.cs" />
     <Compile Include="VM\Student\Enum\Qualification.cs" />
     <Compile Include="VM\Student\Enum\Relation.cs" />
+    <Compile Include="VM\Student\StudentSearchVM.cs" />
     <Compile Include="VM\Student\StudentVM.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -223,6 +232,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612142215469_hideFeeAcound.resx">
       <DependentUpon>201612142215469_hideFeeAcound.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612152316473_StudentRegChange.resx">
+      <DependentUpon>201612152316473_StudentRegChange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612152321211_StudentRegChange1.resx">
+      <DependentUpon>201612152321211_StudentRegChange1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

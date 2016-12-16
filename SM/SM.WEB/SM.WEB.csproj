@@ -396,6 +396,7 @@
     <Content Include="assets\lib\summernote\font\summernotef534.eot" />
     <Content Include="assets\lib\summernote\font\summernotef534.ttf" />
     <Content Include="assets\lib\summernote\font\summernotef534.woff" />
+    <None Include="Properties\PublishProfiles\OfflineDesktop.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -410,12 +411,7 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Uploads\StudentsProfileImg\118interior-wall-foyer-pink-royaleplayplus.jpg.image.1140.610.medium.jpg" />
-    <Content Include="Uploads\StudentsProfileImg\213interior-wall-dining%2520room-purple-wall%2520fashions.jpg.image.1140.610.medium.jpg" />
-    <Content Include="Uploads\StudentsProfileImg\243interior-wall-kid%27s%2520room-pink-wall%2520fashions.jpg.image.1140.610.medium.jpg" />
-    <Content Include="Uploads\StudentsProfileImg\244interior-wall-kid%27s%2520room-yellow-wall%2520fashions.jpg.image.1140.610.medium.jpg" />
-    <Content Include="Uploads\StudentsProfileImg\exterior-wall-exterior-brown-apexultima136.jpg.image.1140.610.medium.jpg" />
-    <Content Include="Uploads\StudentsProfileImg\interior-wall-bedroom-blue-royaleplayplus70.jpg.image.1140.610.medium.jpg" />
+    <Content Include="Uploads\StudentsProfileImg\8a42a833-fc8d-4700-9197-0f6f839a1626.jpg" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

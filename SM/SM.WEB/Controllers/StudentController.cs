@@ -17,16 +17,77 @@ namespace SM.WEB.Controllers
 {
     public class StudentController : Controller
     {
-        // GET: Student
-        public ActionResult Index()
+        [HttpPost]
+        public ActionResult LoadStudent()
         {
-            return View();
+            string curId = SUsers.GetCurrentUserId();
+            var context = new AppContext();
+
+            var students = context.StudentRegs.Where(s => s.SchoolProfileId == curId).Select(s =>
+            new StudentSearchVM
+            {
+                StudentName = s.StudentName,
+                StuClass = s.StuClass.ToString(),
+                StuSection = s.StuSection.ToString(),
+                TenureYear = s.TenureYear.ToString(),
+                IsActive = s.IsActive
+            }).ToList();
+
+            return Json(new { data = students, JsonRequestBehavior.AllowGet });
+
+            ////jQuery DataTables Param
+            //var draw = Request.Form.GetValues("draw").FirstOrDefault();
+            ////Find paging info
+            //var start = Request.Form.GetValues("start").FirstOrDefault();
+            //var length = Request.Form.GetValues("length").FirstOrDefault();
+            ////Find order columns info
+            //var sortColumn = Request.Form.GetValues("columns[" + Request.Form.GetValues("order[0][column]").FirstOrDefault()
+            //                        + "][name]").FirstOrDefault();
+            //var sortColumnDir = Request.Form.GetValues("order[0][dir]").FirstOrDefault();
+            ////find search columns info
+            //var contactName = Request.Form.GetValues("columns[0][search][value]").FirstOrDefault();
+            //var country = Request.Form.GetValues("columns[3][search][value]").FirstOrDefault();
+
+            //int pageSize = length != null ? Convert.ToInt32(length) : 0;
+            //int skip = start != null ? Convert.ToInt16(start) : 0;
+            //int recordsTotal = 0;
+
+
+            //using (MyDatabaseEntities dc = new MyDatabaseEntities())
+            //{
+            //    // dc.Configuration.LazyLoadingEnabled = false; // if your table is relational, contain foreign key
+            //    var v = (from a in dc.Customers select a);
+
+            //    //SEARCHING...
+            //    if (!string.IsNullOrEmpty(contactName))
+            //    {
+            //        v = v.Where(a => a.ContactName.Contains(contactName));
+            //    }
+            //    if (!string.IsNullOrEmpty(country))
+            //    {
+            //        v = v.Where(a => a.Country == country);
+            //    }
+            //    //SORTING...  (For sorting we need to add a reference System.Linq.Dynamic)
+            //    if (!(string.IsNullOrEmpty(sortColumn) && string.IsNullOrEmpty(sortColumnDir)))
+            //    {
+            //        v = v.OrderBy(sortColumn + " " + sortColumnDir);
+            //    }
+
+            //    recordsTotal = v.Count();
+            //    var data = v.Skip(skip).Take(pageSize).ToList();
+            //    return Json(new { draw = draw, recordsFiltered = recordsTotal, recordsTotal = recordsTotal, data = data },
+            //        JsonRequestBehavior.AllowGet);
+            //}
         }
-
-
 
         public ActionResult StudentSearch()
         {
+            string curId = SUsers.GetCurrentUserId();
+            var context = new AppContext();
+
+            var students = context.StudentRegs.Where(s => s.SchoolProfileId == curId).ToList();
+
+
             return View();
         }
 
@@ -43,10 +104,10 @@ namespace SM.WEB.Controllers
         [HttpPost]
         public async System.Threading.Tasks.Task<ActionResult> StudentProfileEdit(StudentVM vm)
         {
-            string fileName = vm.PhotoLocation;
-            string extension;
-            extension = Path.GetExtension(fileName);
-            string pictureName = Path.GetFileNameWithoutExtension(fileName)+extension;
+            //string fileName = vm.PhotoLocation;
+            //string extension;
+            //extension = Path.GetExtension(fileName);
+            string pictureName = Path.GetFileName(vm.PhotoLocation);
 
             //C:\\fakepath\\Pass - Fail Road Sign.jpg"
             var stId = Guid.NewGuid().ToString();
@@ -86,7 +147,7 @@ namespace SM.WEB.Controllers
             StudentReg stg = new StudentReg()
             {
                 SchoolProfileId = curId,
-                StudentId = stId,
+                StudentProfileId = stId,
                 StudentName = vm.Name,
                 StuClass = vm.Stuclass,
                 StuSection = vm.StuSection,
@@ -110,13 +171,24 @@ namespace SM.WEB.Controllers
             {
                 if (System.Web.HttpContext.Current.Request.Files.AllKeys.Any())
                 {
+                    string folderPath = "~/Uploads/StudentsProfileImg/";
+                    string rootPath = Server.MapPath(folderPath);
+
                     var pic = System.Web.HttpContext.Current.Request.Files["HelpSectionImages"];
                     HttpPostedFileBase filebase = new HttpPostedFileWrapper(pic);
-                    var fileName = Path.GetFileName(filebase.FileName);
-                    var path = Path.Combine(Server.MapPath("~/Uploads/StudentsProfileImg"), fileName);
+
+                    string extension;
+                    extension = Path.GetExtension(filebase.FileName);
+                    var fileName = Guid.NewGuid() + extension;
+                    //var fileName = Path.GetFileName(filebase.FileName);
+                    var path = Path.Combine(rootPath, fileName);
                     filebase.SaveAs(path);
                     Thread.Sleep(2000);
-                    return Json("File Saved Successfully.");
+                    folderPath = "/Uploads/StudentsProfileImg/";
+                    string fileRelativePath = folderPath + fileName;
+
+
+                    return new JsonResult { Data = new { filePath = fileRelativePath, onlyFileName = fileName, message = "File Saved Successfully." } };
                 }
                 else { return Json("No File Saved."); }
             }

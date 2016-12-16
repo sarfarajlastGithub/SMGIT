@@ -1,0 +1,16 @@
+namespace SM.LIB.Migrations
+{
+    using System;
+    using System.Data.Entity.Migrations;
+    
+    public partial class StudentRegChange : DbMigration
+    {
+        public override void Up()
+        {
+        }
+        
+        public override void Down()
+        {
+        }
+    }
+}
