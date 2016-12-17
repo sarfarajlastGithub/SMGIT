@@ -12,9 +12,12 @@ using System.Linq;
 using System.Threading;
 using System.Web;
 using System.Web.Mvc;
+using System.Linq.Dynamic;
+using SM.LIB.VM.Account.Enums;
 
 namespace SM.WEB.Controllers
 {
+    [Authorize]
     public class StudentController : Controller
     {
         [HttpPost]
@@ -22,9 +25,75 @@ namespace SM.WEB.Controllers
         {
             string curId = SUsers.GetCurrentUserId();
             var context = new AppContext();
+            var studentdb = context.StudentRegs.Where(s => s.SchoolProfileId == curId);
+            //var students = studentdb.Select(s =>
+            //new StudentSearchVM
+            //{
+            //    StudentName = s.StudentName,
+            //    StuClass = s.StuClass.ToString(),
+            //    StuSection = s.StuSection.ToString(),
+            //    TenureYear = s.TenureYear.ToString(),
+            //    IsActive = s.IsActive
+            //}).ToList();
 
-            var students = context.StudentRegs.Where(s => s.SchoolProfileId == curId).Select(s =>
-            new StudentSearchVM
+            //return Json(new { data = students, JsonRequestBehavior.AllowGet });
+
+            //jQuery DataTables Param
+            var draw = Request.Form.GetValues("draw").FirstOrDefault();
+            //Find paging info
+            var start = Request.Form.GetValues("start").FirstOrDefault();
+            var length = Request.Form.GetValues("length").FirstOrDefault();
+            //Find order columns info
+            var sortColumn = Request.Form.GetValues("columns[" + Request.Form.GetValues("order[0][column]").FirstOrDefault()
+                                    + "][name]").FirstOrDefault();
+            var sortColumnDir = Request.Form.GetValues("order[0][dir]").FirstOrDefault();
+            //find search columns info
+            var studentName = Request.Form.GetValues("columns[0][search][value]").FirstOrDefault();
+            var sClass = Request.Form.GetValues("columns[1][search][value]").FirstOrDefault();
+            var sSection = Request.Form.GetValues("columns[2][search][value]").FirstOrDefault();
+            var tenure = Request.Form.GetValues("columns[3][search][value]").FirstOrDefault();
+            var active = Request.Form.GetValues("columns[4][search][value]").FirstOrDefault();
+
+            int pageSize = length != null ? Convert.ToInt32(length) : 0;
+            int skip = start != null ? Convert.ToInt16(start) : 0;
+            int recordsTotal = 0;
+
+            // dc.Configuration.LazyLoadingEnabled = false; // if your table is relational, contain foreign key
+            var v = studentdb;
+
+            //SEARCHING...
+            if (!string.IsNullOrEmpty(tenure))
+            {
+                TenureYear y = EnumUtil.ParseEnum<TenureYear>(tenure);
+                v = v.Where(a => a.TenureYear == y);
+            }
+            if (!string.IsNullOrEmpty(studentName))
+            {
+                v = v.Where(a => a.StudentName.Contains(studentName));
+            }
+            if (!string.IsNullOrEmpty(sClass))
+            {
+                SClass c = EnumUtil.ParseEnum<SClass>(sClass);
+                v = v.Where(a => a.StuClass == c);
+            }
+            if (!string.IsNullOrEmpty(sSection))
+            {
+                SSectionEnum s = EnumUtil.ParseEnum<SSectionEnum>(sSection);
+                v = v.Where(a => a.StuSection == s);
+            }
+            if (!string.IsNullOrEmpty(active))
+            {
+                bool activee = Convert.ToBoolean(active);
+                v = v.Where(a => a.IsActive == activee);
+            }
+            //SORTING...  (For sorting we need to add a reference System.Linq.Dynamic)
+            if (!(string.IsNullOrEmpty(sortColumn) && string.IsNullOrEmpty(sortColumnDir)))
+            {
+                v = v.OrderBy(sortColumn + " " + sortColumnDir);
+            }
+
+            recordsTotal = v.Count();
+            var data = v.Skip(skip).Take(pageSize).Select(s => new StudentSearchVM
             {
                 StudentName = s.StudentName,
                 StuClass = s.StuClass.ToString(),
@@ -32,52 +101,9 @@ namespace SM.WEB.Controllers
                 TenureYear = s.TenureYear.ToString(),
                 IsActive = s.IsActive
             }).ToList();
+            return Json(new { draw = draw, recordsFiltered = recordsTotal, recordsTotal = recordsTotal, data = data },
+                JsonRequestBehavior.AllowGet);
 
-            return Json(new { data = students, JsonRequestBehavior.AllowGet });
-
-            ////jQuery DataTables Param
-            //var draw = Request.Form.GetValues("draw").FirstOrDefault();
-            ////Find paging info
-            //var start = Request.Form.GetValues("start").FirstOrDefault();
-            //var length = Request.Form.GetValues("length").FirstOrDefault();
-            ////Find order columns info
-            //var sortColumn = Request.Form.GetValues("columns[" + Request.Form.GetValues("order[0][column]").FirstOrDefault()
-            //                        + "][name]").FirstOrDefault();
-            //var sortColumnDir = Request.Form.GetValues("order[0][dir]").FirstOrDefault();
-            ////find search columns info
-            //var contactName = Request.Form.GetValues("columns[0][search][value]").FirstOrDefault();
-            //var country = Request.Form.GetValues("columns[3][search][value]").FirstOrDefault();
-
-            //int pageSize = length != null ? Convert.ToInt32(length) : 0;
-            //int skip = start != null ? Convert.ToInt16(start) : 0;
-            //int recordsTotal = 0;
-
-
-            //using (MyDatabaseEntities dc = new MyDatabaseEntities())
-            //{
-            //    // dc.Configuration.LazyLoadingEnabled = false; // if your table is relational, contain foreign key
-            //    var v = (from a in dc.Customers select a);
-
-            //    //SEARCHING...
-            //    if (!string.IsNullOrEmpty(contactName))
-            //    {
-            //        v = v.Where(a => a.ContactName.Contains(contactName));
-            //    }
-            //    if (!string.IsNullOrEmpty(country))
-            //    {
-            //        v = v.Where(a => a.Country == country);
-            //    }
-            //    //SORTING...  (For sorting we need to add a reference System.Linq.Dynamic)
-            //    if (!(string.IsNullOrEmpty(sortColumn) && string.IsNullOrEmpty(sortColumnDir)))
-            //    {
-            //        v = v.OrderBy(sortColumn + " " + sortColumnDir);
-            //    }
-
-            //    recordsTotal = v.Count();
-            //    var data = v.Skip(skip).Take(pageSize).ToList();
-            //    return Json(new { draw = draw, recordsFiltered = recordsTotal, recordsTotal = recordsTotal, data = data },
-            //        JsonRequestBehavior.AllowGet);
-            //}
         }
 
         public ActionResult StudentSearch()
@@ -86,8 +112,6 @@ namespace SM.WEB.Controllers
             var context = new AppContext();
 
             var students = context.StudentRegs.Where(s => s.SchoolProfileId == curId).ToList();
-
-
             return View();
         }
 

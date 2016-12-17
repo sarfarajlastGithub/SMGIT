@@ -25,5 +25,12 @@ namespace SM.LIB.VM.Student
 
         public bool IsActive { get; set; }
 
+
+        //this is for load enum
+
+        public SClass Sclass { get; set; }
+        public SSectionEnum SSection { get; set; }
+        public TenureYear TenureName { get; set; }
+
     }
 }
