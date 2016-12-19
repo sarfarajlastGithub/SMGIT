@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppDbContext.cs" />
+    <Compile Include="ArtWork.cs" />
     <Compile Include="IdentityModels.cs" />
     <Compile Include="Migrations\201612131137244_Initial.cs" />
     <Compile Include="Migrations\201612131137244_Initial.Designer.cs">
@@ -66,6 +67,10 @@
     <Compile Include="Migrations\201612132250080_adnewattribute.cs" />
     <Compile Include="Migrations\201612132250080_adnewattribute.Designer.cs">
       <DependentUpon>201612132250080_adnewattribute.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612171757358_picmodelAdded.cs" />
+    <Compile Include="Migrations\201612171757358_picmodelAdded.Designer.cs">
+      <DependentUpon>201612171757358_picmodelAdded.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -81,6 +86,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612132250080_adnewattribute.resx">
       <DependentUpon>201612132250080_adnewattribute.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612171757358_picmodelAdded.resx">
+      <DependentUpon>201612171757358_picmodelAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

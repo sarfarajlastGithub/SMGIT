@@ -22,7 +22,9 @@ namespace SM.LIB.VM.Student
         public string Name { get; set; }
         public Gender Gender { get; set; }
         public DateTime? DateOfBirth { get; set; }
+        public string DateOfBirthString { get; set; }
         public string PhotoLocation { get; set; }
+        public SMFile smfile { get; set; }
         public string PreEduInfo { get; set; }
         public string GuardianName { get; set; }
         public string GuardianMobile { get; set; }

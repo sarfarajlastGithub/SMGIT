@@ -78,22 +78,27 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    @Html.LabelFor(m => m.PhotoLocation, new { @class = "col-sm-3 control-label" })
+                                    @Html.Label("Photo", new { @class = "col-sm-3 control-label" })
                                     <div class="col-sm-6">
-                                        <input type="file" name="file" id="file" class="form-control" placeholder="Select Photo" />
-
+                                        <input type="file" name="file" id="Avatar" class="form-control" placeholder="Select Photo" />
                                     </div>
                                 </div>
-                                <div id="lodingFile" class="display-none">
-                                    <div class="col-sm-offset-4 col-sm-10">
-                                        <img src="~/assets/img/ajax-loader.gif" />
+                                @*<div class="col-sm-offset-4 col-sm-10">
+                                    @if (Model != null && Model.smfile.FileType == SM.LIB.VM.Student.Enum.FileType.Avatar)
+                                    {
+                                        <img src="~/SFile?id=@Model.smfile.FileId" alt="avatar" />
+                                    }
+                                </div>*@
+                                @*<div id="lodingFile" class="display-none">
+                                        <div class="col-sm-offset-4 col-sm-10">
+                                            <img src="~/assets/img/ajax-loader.gif" />
+                                        </div>
                                     </div>
-                                </div>
-                                <div id="profileImgId" class="display-none form-group">
-                                    <div class="col-sm-offset-4 col-sm-10">
-                                        <img id="proimg" src="" />
-                                    </div>
-                                </div>
+                                    <div id="profileImgId" class="display-none form-group">
+                                        <div class="col-sm-offset-4 col-sm-10">
+                                            <img id="proimg" src="" />
+                                        </div>
+                                    </div>*@
 
                                 <div class="display-none">
                                     @Html.TextBoxFor(m => m.PhotoLocation, new { @class = "form-control display-none" })
@@ -271,10 +276,10 @@
 
     @Scripts.Render("~/bundles/formjs")
 
-    @Scripts.Render("~/bundles/jqueryval")
+    @*@Scripts.Render("~/bundles/jqueryval")*@
 
     @* Here is own Scripts *@
-    <script src="~/assets/js/uploadPic.js"></script>
+    @*<script src="~/assets/js/uploadPic.js"></script>*@
     <script type="text/javascript">
         $(document).ready(function () {
             $("#submitbtn").click(function () {

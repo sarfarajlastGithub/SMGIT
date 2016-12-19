@@ -1,0 +1,101 @@
+﻿@using SM.LIB.VM
+@model SM.LIB.VM.Student.StudentVM
+
+
+@using (Html.BeginForm("StudentProfileEditFromPopup", "Student", FormMethod.Post, new { id = "" }))
+{
+
+
+
+    <div class="row" style="margin:10px;">
+        <h2 class="page-head-title">Student Profile</h2>
+        <div class="col-md-12 pull-left">
+            @if (Model.smfile.FileType == SM.LIB.VM.Student.Enum.FileType.Avatar)
+            {
+                <img src="~/SFile?id=@Model.smfile.FileId" alt="avatar" />
+            }
+            @*<img class="pull-left" style="border-radius:5px" src="~/Uploads/StudentsProfileImg/@Model.PhotoLocation" alt="@Model.Name" height="170" width="160" />*@
+        </div>
+        <br />
+        <div class="col-sm-6">
+            <div class="panel panel-default panel-table">
+                <div style="background-color:aqua">
+                    <div class="panel-heading bigFont">
+                        Basic Info
+                    </div>
+                </div>
+
+                <div class="panel-body panel-border">
+                    <div class="panel-heading">
+                        <div>@Html.LabelFor(m => m.Name, new { @class = "bigFont" }) : @Html.LabelForModel(Model.Name, new { @class = "bigFont" })</div>
+                        <div>@Html.LabelFor(m => m.Stuclass, new { @class = "bigFont" }) : @Html.LabelForModel(Model.Stuclass.ToString(), new { @class = "bigFont" })</div>
+                        <div>@Html.LabelFor(m => m.StuSection, new { @class = "bigFont" }) : @Html.LabelForModel(Model.StuSection.ToString(), new { @class = "bigFont" })</div>
+                        <div>@Html.LabelFor(m => m.Gender, new { @class = "bigFont" }) : @Html.LabelForModel(Model.Gender.ToString(), new { @class = "bigFont" })</div>
+                        <div>@Html.LabelFor(m => m.DateOfBirth, new { @class = "bigFont" }) : @Html.LabelForModel(DateTimeConvert.GetString(Model.DateOfBirth), new { @class = "bigFont" })</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="panel panel-default panel-table">
+                <div style="background-color:aqua">
+                    <div class="panel-heading bigFont">
+                        Contact Info
+                    </div>
+                </div>
+                <div class="panel-body panel-border">
+                    <div class="panel-heading">
+                        <div>@Html.LabelFor(m => m.GuardianName, new { @class = "bigFont" }) : @Html.LabelForModel(Model.GuardianName, new { @class = "bigFont" })</div>
+                        <div>@Html.LabelFor(m => m.GuardianMobile, new { @class = "bigFont" }) : @Html.LabelForModel(Model.GuardianMobile, new { @class = "bigFont" })</div>
+                        <div>@Html.LabelFor(m => m.GuardialEmail, new { @class = "bigFont" }) : @Html.LabelForModel(Model.GuardialEmail, new { @class = "bigFont" })</div>
+                        <div>@Html.LabelFor(m => m.GuardianOcupation, new { @class = "bigFont" }) : @Html.LabelForModel(Model.GuardianOcupation, new { @class = "bigFont" })</div>
+                        <div>@Html.LabelFor(m => m.GuardianQualification, new { @class = "bigFont" }) : @Html.LabelForModel(Model.GuardianQualification.ToString(), new { @class = "bigFont" })</div>
+                        <div>@Html.LabelFor(m => m.RelationWithGuardian, new { @class = "bigFont" }) : @Html.LabelForModel(Model.RelationWithGuardian.ToString(), new { @class = "bigFont" })</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin:10px;">
+        <div class="col-sm-6">
+            <div class="panel panel-default panel-table">
+                <div style="background-color:aqua">
+                    <div class="panel-heading bigFont">
+                        Address
+                    </div>
+                </div>
+                <div class="panel-body panel-border">
+                    <div class="panel-heading">
+                        <div>@Html.LabelFor(m => m.Address.AddL1, new { @class = "bigFont" }) : @Html.LabelForModel(Model.Address.AddL1, new { @class = "bigFont" })</div>
+                        <div>@Html.LabelFor(m => m.Address.AddL2, new { @class = "bigFont" }) : @Html.LabelForModel(Model.Address.AddL2, new { @class = "bigFont" })</div>
+                        <div>@Html.LabelFor(m => m.Address.City, new { @class = "bigFont" }) : @Html.LabelForModel(Model.Address.City.ToString(), new { @class = "bigFont" })</div>
+                        <div>@Html.LabelFor(m => m.Address.Pin, new { @class = "bigFont" }) : @Html.LabelForModel(Model.Address.Pin.ToString(), new { @class = "bigFont" })</div>
+                        <div>@Html.LabelFor(m => m.Address.state, new { @class = "bigFont" }) : @Html.LabelForModel(Model.Address.state.ToString(), new { @class = "bigFont" })</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="panel panel-default panel-table">
+                <div style="background-color:aqua">
+                    <div class="panel-heading bigFont">
+                        Academic Info
+                    </div>
+                </div>
+                <div class="panel-body panel-border">
+                    <div class="panel-heading">
+                        <div>@Html.LabelFor(m => m.TenureYear, new { @class = "bigFont" }) : @Html.LabelForModel(Model.TenureYear.ToString(), new { @class = "bigFont" })</div>
+                        <div>@Html.LabelFor(m => m.AdmissioinDate, new { @class = "bigFont" }) : @Html.LabelForModel(DateTimeConvert.GetString(Model.AdmissioinDate), new { @class = "bigFont" })</div>
+                        <div>@Html.LabelFor(m => m.IsActive, new { @class = "bigFont" }) : @Html.LabelForModel(Model.IsActive.ToString(), new { @class = "bigFont" })</div>
+                        <div>@Html.LabelFor(m => m.PreEduInfo, new { @class = "bigFont" }) : @Html.LabelForModel(Model.PreEduInfo, new { @class = "bigFont" })</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            @Html.ActionLink("Edit", "StuEdtPop", new { id = Model.StudentId })
+            @*<input type="submit" style="margin-left:40%;" class="btn btn-primary  btn-xl" value="Edit" />*@
+        </div>
+    </div>
+
+}

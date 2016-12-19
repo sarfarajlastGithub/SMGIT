@@ -447,18 +447,22 @@ namespace SM.WEB.Controllers
                 {
                     case SignInStatus.Success:
                         {
-                            var currentUser = User.Identity.GetUserName();
-                            var context = new AppContext();
-                            var user = context.SchoolProfile.First(m => m.UserName == currentUser);
+                            //var currentUser = User.Identity.GetUserName();
+                            //var context = new AppContext();
+                            //var user = context.SchoolProfile.First(m => m.UserName == currentUser);
                             //bool isComplete = user.IsComplete;
-                            if (user.IsComplete)
-                            {
-                                returnUrl = "SchoolProfileUpdate";
-                            }
-                            else
-                            {
-                                returnUrl = "SchoolProfileUpdate";
-                            }
+                            //if (user.IsComplete)
+                            //{
+                            //    returnUrl = "SchoolProfileUpdate";
+                            //}
+                            //else
+                            //{
+                            //    returnUrl = "SchoolProfileUpdate";
+                            //}
+                        }
+                        if (returnUrl == "" || returnUrl == null)
+                        {
+                            returnUrl = "SchoolProfileUpdate";
                         }
                         return RedirectToAction(returnUrl, "Account");
                     case SignInStatus.LockedOut:

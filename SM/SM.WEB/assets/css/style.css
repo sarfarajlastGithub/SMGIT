@@ -17,9 +17,6 @@ body, figure {
     margin: 0;
 }
 
-.display-none{
-    display: none;
-}
 
 .navbar-fixed-bottom .navbar-collapse, .navbar-fixed-top .navbar-collapse, .pre-scrollable {
     max-height: 340px;

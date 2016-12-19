@@ -10,5 +10,6 @@ namespace ClassLibrary1
     public class AppDbContext : ApplicationDbContext
     {
         public DbSet<scClass> ScClass { get; set; }
+        public DbSet<ArtWork> ArtWorks { get; set; }
     }
 }

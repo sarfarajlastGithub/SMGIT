@@ -17,6 +17,9 @@ namespace SM.LIB.EN.Student
         public string Name { get; set; }
         public Gender Gender { get; set; }
         public DateTime? DateOfBirth { get; set; }
+
+        public virtual ICollection<SMFile> Files { get; set; }
+        public int FileId { get; set; }
         public string PhotoLocation { get; set; }
         public string PreEduInfo { get; set; }
 

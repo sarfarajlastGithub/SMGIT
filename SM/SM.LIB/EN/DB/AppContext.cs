@@ -24,5 +24,11 @@ namespace SM.LIB.EN.DB
         public DbSet<StudentReg> StudentRegs { get; set; }
 
         public DbSet<TenureTime> TenureTimes { get; set; }
+
+        public System.Data.Entity.DbSet<SM.LIB.VM.Student.StudentVM> StudentVMs { get; set; }
+
+        public System.Data.Entity.DbSet<SM.LIB.EN.Student.Address> Addresses { get; set; }
+
+        public DbSet<SMFile> Files { get; set; }
     }
 }

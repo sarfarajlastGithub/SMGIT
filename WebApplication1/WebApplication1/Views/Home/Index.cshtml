@@ -1,4 +1,5 @@
-﻿@{
+﻿
+@{
     ViewBag.Title = "Home Page";
     AjaxOptions options = new AjaxOptions
     {
@@ -34,7 +35,7 @@
 <div id="divLoading" style="color:red;width:200px;font-size:larger;display:none;position:absolute;">
     <img src="~/Content/img/ajax-loader (1).gif" />Loading ....
 </div>
-@using (Ajax.BeginForm("SearchPeople",options))
+@using (Ajax.BeginForm("SearchPeople", options))
 {
 
     <div>
@@ -46,6 +47,8 @@
         <input type="file" name="UploadFile" id="txtUploadFile" class="makethispretty" />
     </div>
 }
+
+
 
 
 

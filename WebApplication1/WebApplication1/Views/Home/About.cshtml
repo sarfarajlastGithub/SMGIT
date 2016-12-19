@@ -1,8 +1,6 @@
-﻿@{
-    ViewBag.Title = "About";
-}
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+﻿@model ClassLibrary1.ArtWork
+@*<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>*@
 
 
 <h1>Http get and post</h1>
@@ -17,3 +15,7 @@
 
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script src="~/Scripts/UploadPic.js"></script>
+
+@*<td>
+    <img src="@Url.Action("GetThumbnailImage", "Artwork", null)" alt="Artwork Image" />
+</td>*@

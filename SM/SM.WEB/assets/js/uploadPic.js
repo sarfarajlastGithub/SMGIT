@@ -33,7 +33,7 @@
             img = new Image();
             img.onload = function () {
                 //if run with unsuccessful
-                if (this.width != 160 && this.height != 170 || (f1.size/1024) > 200) {
+                if (this.width > 160 && this.height > 170 || (f1.size/1024) > 200) {
                     $("#file").val("");
                     alert("Image has to be Width:160 and Height:170 And less the 50 kb");
                     return false;
