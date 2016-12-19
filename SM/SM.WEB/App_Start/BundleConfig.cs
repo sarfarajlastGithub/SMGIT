@@ -63,9 +63,6 @@ namespace SM.WEB
                       "~/assets/lib/select2/css/select2.min.css",
                       "~/assets/lib/bootstrap-slider/css/bootstrap-slider.css",
                       "~/assets/lib/datetimepicker/css/bootstrap-datetimepicker.min.css"));
-
-            //BundleTable.EnableOptimizations = true;
-
         }
     }
 }
