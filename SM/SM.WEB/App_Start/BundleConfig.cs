@@ -26,9 +26,7 @@ namespace SM.WEB
 
             //this is default set for template
             bundles.Add(new ScriptBundle("~/bundles/defaultjs").Include(
-                        "~/assets/lib/jquery/jquery.min.js",
                         "~/assets/lib/perfect-scrollbar/js/perfect-scrollbar.jquery.min.js",
-                        "~/assets/js/main.js",
                         "~/assets/lib/bootstrap/dist/js/bootstrap.min.js"));
 
             //this is default set for template

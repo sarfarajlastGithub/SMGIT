@@ -53,6 +53,10 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Linq.Dynamic, Version=1.0.6132.35681, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Linq.Dynamic.1.0.7\lib\net40\System.Linq.Dynamic.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -504,7 +508,7 @@
     <Content Include="Views\Account\ClassViewAndUpdate.cshtml" />
     <Content Include="Views\Student\StudentProfileEdit.cshtml" />
     <Content Include="Views\Student\StudentSearch.cshtml" />
-    <Content Include="Views\Student\_StudentProfilePartialView.cshtml" />
+    <Content Include="Views\Student\StudentProfileView.cshtml" />
     <Content Include="Views\Addresses\Create.cshtml" />
     <Content Include="Views\Addresses\Delete.cshtml" />
     <Content Include="Views\Addresses\Details.cshtml" />
